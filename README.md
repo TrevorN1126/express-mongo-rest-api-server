@@ -45,6 +45,11 @@ Set environment (vars):
 cp .env.example .env
 ```
 
+Seed database with a user:
+```sh
+yarn seed
+```
+
 Start server:
 ```sh
 # Start server
