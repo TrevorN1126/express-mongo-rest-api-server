@@ -26,8 +26,8 @@ Originally forked from [Express & mongoose REST API Boilerplate in ES6 with Code
 
 Clone the repo:
 ```sh
-git clone
-cd racquet-library
+git clone https://github.com/TrevorN1126/express-rest-api-server.git
+cd express-rest-api-server
 ```
 
 Install yarn:
