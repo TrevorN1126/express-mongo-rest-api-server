@@ -50,8 +50,11 @@ Start server:
 # Start server
 yarn start
 
+# start server with nodemon
+yarn start-dev
+
 # Selectively set DEBUG env var to get logs
-DEBUG=racquet-library:* yarn start
+DEBUG=express-rest-api-server:* yarn start
 ```
 Refer [debug](https://www.npmjs.com/package/debug) to know how to selectively turn on logs.
 
