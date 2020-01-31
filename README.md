@@ -96,6 +96,23 @@ yarn lint:watch
 3. yarn --production
 
 ```
+## Routes
+Protected Routes require a jwt header to access
+Authorization: Bearer {token}
+
+### Auth
+* POST /api/auth/login - Returns token if correct username and password is provided
+* GET /api/auth/random-number - Example route that return a random number **protected route)**
+
+### User
+* GET /api/users - Get list of users **protected route)**
+* POST /api/users - Create new user
+
+* GET /api/users/:userId - Get user
+* PUT /api/users/:userId - Update user
+* DELETE /api/users/:userId - Delete user
+
+
 ## Logging
 
 Universal logging library [winston](https://www.npmjs.com/package/winston) is used for logging. It has support for multiple transports.  A transport is essentially a storage device for your logs. Each instance of a winston logger can have multiple transports configured at different levels. For example, one may want error logs to be stored in a persistent remote location (like a database), but all logs output to the console or a local file. We just log to the console for simplicity, you can configure more transports as per your requirement.
@@ -112,4 +129,4 @@ Logs stacktrace of error to console along with other details. You should ideally
 For code contributions submit a pull request with unit test.
 
 ## License
-This project is licensed under the [MIT License](https://github.com/kunalkapadia/racquet-library/blob/master/LICENSE)
+This project is licensed under the MIT License

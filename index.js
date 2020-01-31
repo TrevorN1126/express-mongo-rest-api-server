@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const util = require('util');
-const debug = require('debug')('racquet-library:index');
+const debug = require('debug')('express-rest-api-server:index');
 const config = require('./config/config');
 const app = require('./config/express');
 

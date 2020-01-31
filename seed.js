@@ -5,6 +5,9 @@ const User = require('./server/user/user.model');
 const newUserName = 'TestUser';
 const newPassword = 'password';
 
+const newAdminUserName = 'TestAdmin';
+const newAdminPassword = 'password';
+
 // connect to mongo db
 const mongoUri = config.mongo.host;
 mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -12,10 +15,41 @@ mongoose.connection.on('error', () => {
   throw new Error(`unable to connect to database: ${mongoUri}`);
 });
 
+const admin = new User({
+  username: newAdminUserName,
+  password: newPassword,
+  permissions: ['admin']
+});
+
+
+admin.save()
+  .then((savedUser) => {
+    console.log(savedUser);
+    // fetch user and test password verification
+    User.findOne({ username: newAdminUserName }, (err, user) => {
+      if (err) throw err;
+
+      // test a matching password
+      user.comparePassword(newAdminPassword, (err, isMatch) => {
+        if (err) throw err;
+        console.log('password:', isMatch); // -> password: true
+      });
+
+      // test a failing password
+      user.comparePassword('123Password', (err, isMatch) => {
+        if (err) throw err;
+        console.log('123Password:', isMatch); // -> 123Password: false
+      });
+    });
+  })
+  .catch((e) => console.log(e));
+
 const user = new User({
   username: newUserName,
-  password: newPassword
+  password: newPassword,
+  permissions: ['user']
 });
+
 
 user.save()
   .then((savedUser) => {

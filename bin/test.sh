@@ -3,4 +3,4 @@
 # --build: Build images before starting containers.
 # --abort-on-container-exit: Stops all containers if any container is stopped
 docker-compose -f 'docker-compose.test.yml' -p ci up --build --abort-on-container-exit
-exit $(docker wait ci_racquet-library_1)
+exit $(docker wait ci_express-rest-api-server_1)

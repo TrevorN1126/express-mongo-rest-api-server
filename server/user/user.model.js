@@ -22,6 +22,10 @@ const UserSchema = new Schema({
     type: String,
     required: true
   },
+  permissions: {
+    type: [String],
+    enum: ['admin', 'user']
+  },
   phone: {
     type: String,
     match: [/^[1-9][0-9]{9}$/, 'The value of path {PATH} ({VALUE}) is not a valid mobile number.']
