@@ -1,4 +1,5 @@
 const User = require('./user.model');
+const UserService = require('./user.service');
 
 /**
  * Load user and append to req.
@@ -26,15 +27,21 @@ function get(req, res) {
  * @property {string} req.body.password - The password of user.
  * @returns {User}
  */
-function create(req, res, next) {
-  const user = new User({
-    username: req.body.username,
-    password: req.body.password
-  });
+async function create(req, res, next) {
 
-  user.save()
-    .then((savedUser) => res.json(savedUser))
-    .catch((e) => next(e));
+  const newUser = {
+    username: req.body.username,
+    password: req.body.password,
+    permissions: req.body.permissions
+  };
+
+  const UserServiceInstance = new UserService();
+  const savedUser = await UserServiceInstance.Create(newUser);
+
+  // await EmailService.startSignupSequence(savedUser);
+
+  return res.json( savedUser );
+
 }
 
 /**
@@ -44,13 +51,16 @@ function create(req, res, next) {
  * @returns {User}
  */
 function update(req, res, next) {
-  const { user } = req;
-  user.username = req.body.username;
-  user.password = req.body.password;
+  // const { user } = req;
+  // user.username = req.body.username;
+  // user.password = req.body.password;
+  //
+  // user.save()
+  //   .then((savedUser) => res.json(savedUser))
+  //   .catch((e) => next(e));
 
-  user.save()
-    .then((savedUser) => res.json(savedUser))
-    .catch((e) => next(e));
+
+
 }
 
 /**

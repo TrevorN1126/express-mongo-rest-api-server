@@ -6,6 +6,7 @@ module.exports = {
     body: {
       username: Joi.string().required(),
       password: Joi.string().required(),
+      permissions: Joi.array().items(Joi.string().required())
     }
   },
 

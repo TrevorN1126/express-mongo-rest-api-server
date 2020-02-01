@@ -9,7 +9,7 @@ var guard = require('express-jwt-permissions')({
 module.exports = function (permissionsArray) {
   return function (req, res, next) {
     expressJwt({ secret: config.jwtSecret });
-    guard.check(permissionsArray);
+    if (permissionsArray) { guard.check(permissionsArray); }
     next()
   }
 }
