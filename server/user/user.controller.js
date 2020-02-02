@@ -2,29 +2,10 @@ const User = require('./user.model');
 const UserService = require('./user.service');
 
 /**
- * Load user and append to req.
- */
-function load(req, res, next, id) {
-  User.get(id)
-    .then((user) => {
-      req.user = user; // eslint-disable-line no-param-reassign
-      return next();
-    })
-    .catch((e) => next(e));
-}
-
-/**
- * Get user
- * @returns {User}
- */
-function get(req, res) {
-  return res.json(req.user);
-}
-
-/**
  * Create new user
  * @property {string} req.body.username - The username of user.
  * @property {string} req.body.password - The password of user.
+ * @property {[string]} req.body.permissions - Array of strings for the permissions
  * @returns {User}
  */
 async function create(req, res, next) {
@@ -35,31 +16,64 @@ async function create(req, res, next) {
     permissions: req.body.permissions
   };
 
+  // console.log(req.body);
+
   const UserServiceInstance = new UserService();
-  const savedUser = await UserServiceInstance.Create(newUser);
 
-  // await EmailService.startSignupSequence(savedUser);
+  try {
+    const savedUser = await UserServiceInstance.Create(newUser);
 
-  return res.json( savedUser );
+    // Example of other services and logic that can be called during hit to endpoint
+    // const EmailServiceInstance = new EmailService();
+    // await EmailServiceInstance.startSignupSequence(savedUser);
+
+    return res.json( savedUser );
+  } catch (e) {
+    return res.json(e)
+  }
+
+}
+
+/**
+ * Get an existing user
+ * @property {string} req.params.userId - The _id of user.
+ * @returns {User}
+ */
+async function get(req, res) {
+
+  const userId = req.params.userId;
+
+  const UserServiceInstance = new UserService();
+
+  try {
+    const user = await UserServiceInstance.GetUser(userId);
+    return res.json(user);
+  } catch (e) {
+    return res.json(e)
+  }
+
 
 }
 
 /**
  * Update existing user
- * @property {string} req.body.username - The username of user.
- * @property {string} req.body.password - The password of user.
+ * @property {string} req.params.userId - The _id of user.
+ * @property {object} req.body - Object containing new values for the user.
  * @returns {User}
  */
-function update(req, res, next) {
-  // const { user } = req;
-  // user.username = req.body.username;
-  // user.password = req.body.password;
-  //
-  // user.save()
-  //   .then((savedUser) => res.json(savedUser))
-  //   .catch((e) => next(e));
+async function update(req, res, next) {
 
+  const userId = req.params.userId;
+  const newValues = req.body;
 
+  const UserServiceInstance = new UserService();
+
+  try {
+    const updatedUser = await UserServiceInstance.Update(userId, newValues);
+    return res.json(updatedUser);
+  } catch (e) {
+    return res.json(e)
+  }
 
 }
 
@@ -69,24 +83,39 @@ function update(req, res, next) {
  * @property {number} req.query.limit - Limit number of users to be returned.
  * @returns {User[]}
  */
-function list(req, res, next) {
-  const { limit = 50, skip = 0 } = req.query;
-  User.list({ limit, skip })
-    .then((users) => res.json(users))
-    .catch((e) => next(e));
+async function list(req, res, next) {
+
+  const UserServiceInstance = new UserService();
+
+  try {
+    const userList = await UserServiceInstance.List();
+    return res.json(userList);
+  } catch (e) {
+    return res.json(e)
+  }
+
+
 }
 
 /**
  * Delete user.
  * @returns {User}
  */
-function remove(req, res, next) {
-  const { user } = req;
-  user.remove()
-    .then((deletedUser) => res.json(deletedUser))
-    .catch((e) => next(e));
+async function remove(req, res, next) {
+
+  const userId = req.params.userId;
+
+  const UserServiceInstance = new UserService();
+
+  try {
+    const userRemoved = await UserServiceInstance.Remove(userId);
+    return res.json(userRemoved);
+  } catch (e) {
+    return res.json(e)
+  }
+
 }
 
 module.exports = {
-  load, get, create, update, list, remove
+  create, get, update, list, remove
 };

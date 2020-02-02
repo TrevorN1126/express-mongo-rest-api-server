@@ -13,7 +13,7 @@ module.exports = {
   // UPDATE /api/users/:userId
   updateUser: {
     body: {
-      username: Joi.string().required(),
+      username: Joi.string(),
     },
     params: {
       userId: Joi.string().hex().required()

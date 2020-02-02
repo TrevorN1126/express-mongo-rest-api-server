@@ -8,7 +8,6 @@ const router = express.Router(); // eslint-disable-line new-cap
 
 router.route('/')
   /** GET /api/users - Get list of users */
-  // .get(protectRoute, guard.check(['admin']), userCtrl.list)
   .get(protectRoute(['admin']), userCtrl.list)
 
   /** POST /api/users - Create new user */
@@ -23,8 +22,5 @@ router.route('/:userId')
 
   /** DELETE /api/users/:userId - Delete user */
   .delete(protectRoute(['admin']), userCtrl.remove);
-
-/** Load user when API with userId route parameter is hit */
-router.param('userId', userCtrl.load);
 
 module.exports = router;
