@@ -1,4 +1,6 @@
 const express = require('express');
+const util = require('util');
+const debug = require('debug')('express-rest-api-server:app');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -9,10 +11,27 @@ const httpStatus = require('http-status');
 const expressWinston = require('express-winston');
 const expressValidation = require('express-validation');
 const helmet = require('helmet');
-const winstonInstance = require('./winston');
-const routes = require('../index.route');
-const config = require('./config');
-const APIError = require('../server/helpers/APIError');
+const mongoose = require('mongoose');
+const winstonInstance = require('./config/winston');
+const routes = require('./index.route');
+const config = require('./config/config');
+const APIError = require('./server/helpers/APIError');
+
+
+// connect to mongo db
+const mongoUri = config.mongo.host;
+mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connection.on('error', () => {
+  throw new Error(`unable to connect to database: ${mongoUri}`);
+});
+
+
+// print mongoose logs in dev env
+if (config.mongooseDebug) {
+  mongoose.set('debug', (collectionName, method, query, doc) => {
+    debug(`${collectionName}.${method}`, util.inspect(query, false, 20), doc);
+  });
+}
 
 const app = express();
 
@@ -34,6 +53,9 @@ app.use(helmet());
 // enable CORS - Cross Origin Resource Sharing
 app.use(cors());
 
+// mount all routes on /api path
+app.use('/api', routes);
+
 // enable detailed API logging in dev env
 if (config.env === 'development') {
   expressWinston.requestWhitelist.push('body');
@@ -45,9 +67,6 @@ if (config.env === 'development') {
     colorStatus: true // Color the status code (default green, 3XX cyan, 4XX yellow, 5XX red).
   }));
 }
-
-// mount all routes on /api path
-app.use('/api', routes);
 
 // if error is not an instanceOf APIError, convert it.
 app.use((err, req, res, next) => {

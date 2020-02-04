@@ -1,9 +1,7 @@
 # Express Rest API Server Boilerplate
 ## Overview
 
-This is a boilerplate application for building REST APIs with Express Mongoose, Mocha tests and JWT Authentication.
-
-Originally forked from [Express & mongoose REST API Boilerplate in ES6 with Code Coverage](https://https://github.com/kunalkapadia/express-mongoose-es6-rest-api) and then updated and refactored.
+This is a boilerplate application for building REST APIs with Express, Mongoose, permission based JWT Authentication and Mocha tests.
 
 ### Features
 
@@ -102,10 +100,10 @@ Authorization: Bearer {token}
 
 ### Auth
 * POST /api/auth/login - Returns token if correct username and password is provided
-* GET /api/auth/random-number - Example route that return a random number **protected route)**
+* GET /api/auth/random-number - Example route that return a random number **protected route**
 
 ### User
-* GET /api/users - Get list of users **protected route)**
+* GET /api/users - Get list of users **protected route**
 * POST /api/users - Create new user
 
 * GET /api/users/:userId - Get user
