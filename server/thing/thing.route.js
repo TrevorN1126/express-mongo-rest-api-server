@@ -9,14 +9,14 @@ const router = express.Router(); // eslint-disable-line new-cap
 
 router.route('/')
   /** GET /api/things - Get list of things */
-  .get( thingCtrl.list )
+  .get(thingCtrl.list)
 
   /** POST /api/things - Create new thing */
-  .post(protectRoute([['user'],['admin']]), validate(paramValidation.createThing), thingCtrl.create);
+  .post(protectRoute([['user'], ['admin']]), validate(paramValidation.createThing), thingCtrl.create);
 
 router.route('/:thingId')
   /** GET /api/things/:thingId - Get thing */
-  .get( thingCtrl.get )
+  .get(thingCtrl.get)
 
   /** PUT /api/things/:thingId - Update thing */
   .put(protectRoute(['admin']), thingCtrl.update)

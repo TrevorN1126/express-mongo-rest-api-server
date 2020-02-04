@@ -17,15 +17,15 @@ mongoose.connection.on('error', () => {
 });
 
 const thing = new Thing({
-  name: "TheThing",
-  description: "Description of the thing"
+  name: 'TheThing',
+  description: 'Description of the thing'
 });
 
 thing.save()
-  .then(savedThing => {
+  .then((savedThing) => {
     console.log(savedThing);
   })
-  .catch(err => {console.log(err)});
+  .catch((err) => { console.log(err); });
 
 const admin = new User({
   username: newAdminUserName,
@@ -54,7 +54,7 @@ admin.save()
       });
     });
   })
-  .catch(err => {console.log(err)});
+  .catch((err) => { console.log(err); });
 
 const user = new User({
   username: newUserName,
@@ -85,4 +85,4 @@ user.save()
       mongoose.disconnect();
     });
   })
-  .catch(err => {console.log(err)});
+  .catch((err) => { console.log(err); });

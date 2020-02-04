@@ -33,7 +33,7 @@ function login(req, res, next) {
           res.json({
             success: true,
             message: 'Authentication successfull',
-            user: user,
+            user,
             token
           });
         });
