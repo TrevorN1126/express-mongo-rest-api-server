@@ -53,6 +53,7 @@ function login(req, res, next) {
 */
 function getRandomNumber(req, res) {
   // req.user is assigned by jwt middleware if valid token is provided
+  // if (req.)
   return res.json({
     user: req.user,
     num: Math.random() * 100

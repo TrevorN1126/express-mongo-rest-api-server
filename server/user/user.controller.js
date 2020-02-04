@@ -1,4 +1,6 @@
-const User = require('./user.model');
+const httpStatus = require('http-status');
+const APIError = require('../helpers/APIError');
+
 const UserService = require('./user.service');
 
 /**
@@ -15,8 +17,6 @@ async function create(req, res, next) {
     password: req.body.password,
     permissions: req.body.permissions
   };
-
-  // console.log(req.body);
 
   const UserServiceInstance = new UserService();
 
@@ -39,7 +39,7 @@ async function create(req, res, next) {
  * @property {string} req.params.userId - The _id of user.
  * @returns {User}
  */
-async function get(req, res) {
+async function get(req, res, next) {
 
   const userId = req.params.userId;
 
@@ -49,7 +49,8 @@ async function get(req, res) {
     const user = await UserServiceInstance.GetUser(userId);
     return res.json(user);
   } catch (e) {
-    return res.json(e)
+    const error = new APIError('User Not Found', httpStatus.NOT_FOUND, true);
+    return next(error);
   }
 
 

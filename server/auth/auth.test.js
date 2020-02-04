@@ -1,4 +1,4 @@
-const request = require('supertest-as-promised');
+const request = require('supertest');
 const httpStatus = require('http-status');
 const chai = require('chai'); // eslint-disable-line import/newline-after-import
 const { expect } = chai;
@@ -13,7 +13,7 @@ describe('## Auth APIs', () => {
   };
 
   const invalidUserCredentials = {
-    username: 'react',
+    username: 'notAUser',
     password: 'IDontKnow'
   };
 

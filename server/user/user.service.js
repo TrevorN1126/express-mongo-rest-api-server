@@ -16,7 +16,7 @@ class UserService {
 
   async GetUser(userId){
     let user = await UserModel.findById(userId);
-    if (!user) return res.json({ message: 'User not found' });
+    if (!user) throw new Error('User not found');
     return user;
 
   }
