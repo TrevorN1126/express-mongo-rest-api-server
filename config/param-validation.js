@@ -26,5 +26,11 @@ module.exports = {
       username: Joi.string().required(),
       password: Joi.string().required()
     }
+  },
+
+  createThing: {
+    body: {
+      name: Joi.string().required()
+    }
   }
 };
