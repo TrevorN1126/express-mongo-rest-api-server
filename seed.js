@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const config = require('./config/config');
 const User = require('./server/user/user.model');
+const Thing = require('./server/thing/thing.model');
 
 const newUserName = 'TestUser';
 const newPassword = 'password';
@@ -14,6 +15,17 @@ mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.connection.on('error', () => {
   throw new Error(`unable to connect to database: ${mongoUri}`);
 });
+
+const thing = new Thing({
+  name: "TheThing",
+  description: "Description of the thing"
+});
+
+thing.save()
+  .then(savedThing => {
+    console.log(savedThing);
+  })
+  .catch(err => {console.log(err)});
 
 const admin = new User({
   username: newAdminUserName,
@@ -42,7 +54,7 @@ admin.save()
       });
     });
   })
-  .catch((e) => console.log(e));
+  .catch(err => {console.log(err)});
 
 const user = new User({
   username: newUserName,
@@ -73,4 +85,4 @@ user.save()
       mongoose.disconnect();
     });
   })
-  .catch((e) => console.log(e));
+  .catch(err => {console.log(err)});
