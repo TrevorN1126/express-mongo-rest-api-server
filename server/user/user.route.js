@@ -4,7 +4,6 @@ const paramValidation = require('../../config/param-validation');
 const UserController = require('./user.controller');
 const protectRoute = require('../middleware/protectRoute');
 
-
 const router = express.Router(); // eslint-disable-line new-cap
 
 const UserControllerInstance = new UserController();

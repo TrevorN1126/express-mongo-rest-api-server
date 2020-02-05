@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>Documentation Class: UserService</title>
+	<title>Documentation Class: AuthController</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -72,16 +72,16 @@
 		<div id="main">
 			
 
-	<h1 class="page-title">Class: UserService</h1>
+	<h1 class="page-title">Class: AuthController</h1>
 <section>
 
 <header>
     
         <h2>
-        UserService
+        AuthController
         </h2>
         
-            <div class="class-description">Creates a new UserService.</div>
+            <div class="class-description">UserController Class.</div>
         
     
 </header>
@@ -93,7 +93,7 @@
         
 <hr>
 <dt>
-    <h4 class="name" id="UserService"><span class="type-signature"></span>new UserService()</h4>
+    <h4 class="name" id="AuthController"><span class="type-signature"></span>new AuthController()</h4>
     
     
 </dt>
@@ -185,7 +185,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="Create"><span class="type-signature">&lt;async> </span>Create()</h4>
+    <h4 class="name" id="getRandomNumber"><span class="type-signature"></span>getRandomNumber(req, res)</h4>
     
     
 </dt>
@@ -193,7 +193,7 @@
 
     
     <div class="description">
-        Create a new user
+        This is a protected route. Will return random number only if jwt token is provided in header.
     </div>
     
 
@@ -202,6 +202,68 @@
     
 
     
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>req</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>res</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
     
 
     
@@ -258,10 +320,6 @@
     <h5>Returns:</h5>
     
             
-<div class="param-desc">
-    user
-</div>
-
 
 
 <dl>
@@ -270,7 +328,7 @@
     </dt>
     <dd>
         
-<span class="param-type">object</span>
+<span class="param-type">*</span>
 
 
 
@@ -287,7 +345,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="GetUser"><span class="type-signature">&lt;async> </span>GetUser()</h4>
+    <h4 class="name" id="login"><span class="type-signature"></span>login(req, res, next)</h4>
     
     
 </dt>
@@ -295,7 +353,7 @@
 
     
     <div class="description">
-        Get a user
+        Returns jwt token if username is stored in the databse and the password matches
     </div>
     
 
@@ -304,6 +362,86 @@
     
 
     
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>req</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>res</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>next</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
     
 
     
@@ -360,10 +498,6 @@
     <h5>Returns:</h5>
     
             
-<div class="param-desc">
-    user
-</div>
-
 
 
 <dl>
@@ -372,211 +506,7 @@
     </dt>
     <dd>
         
-<span class="param-type">object</span>
-
-
-
-    </dd>
-</dl>
-
-
-        
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id="List"><span class="type-signature">&lt;async> </span>List()</h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        Get a list of all users
-    </div>
-    
-
-    
-
-    
-
-    
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <h5>Returns:</h5>
-    
-            
-<div class="param-desc">
-    user - An array of users
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Array.&lt;object></span>
-
-
-
-    </dd>
-</dl>
-
-
-        
-
-    
-</dd>
-
-        
-            
-<hr>
-<dt>
-    <h4 class="name" id="Update"><span class="type-signature">&lt;async> </span>Update()</h4>
-    
-    
-</dt>
-<dd>
-
-    
-    <div class="description">
-        Update a user
-    </div>
-    
-
-    
-
-    
-
-    
-    
-
-    
-<dl class="details">
-    
-
-	
-
-	
-
-	
-
-    
-
-    
-
-    
-
-    
-
-	
-
-	
-
-	
-
-	
-
-	
-
-
-
-	
-
-	
-
-	
-
-	
-</dl>
-
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <h5>Returns:</h5>
-    
-            
-<div class="param-desc">
-    user
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">object</span>
+<span class="param-type">*</span>
 
 
 
