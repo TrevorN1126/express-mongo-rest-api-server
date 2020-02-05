@@ -17,7 +17,8 @@
     "lint:watch": "yarn lint -- --watch",
     "precommit": "yarn lint && yarn test",
     "test": "cross-env NODE_ENV=test ./node_modules/.bin/mocha --ui bdd --reporter spec --colors server --recursive",
-    "test:watch": "yarn test -- --watch"
+    "test:watch": "yarn test -- --watch",
+    "test:coverage": "nyc --reporter=lcov --reporter=text yarn test"
   },
   "dependencies": {
     "bcrypt": "^3.0.7",
@@ -54,10 +55,13 @@
     "eslint-config-airbnb-base": "14.0.0",
     "eslint-plugin-import": "2.20.0",
     "eslint-watch": "6.0.1",
+    "gulp": "false4.0.2",
     "husky": "4.2.1",
     "istanbul": "1.1.0-alpha.1",
+    "jsdoc": "false3.6.3",
     "mocha": "7.0.1",
     "nodemon": "false2.0.2",
+    "nyc": "false15.0.0",
     "supertest": "4.0.2",
     "supertest-as-promised": "4.0.2",
     "validate-commit-msg": "^2.14.0"

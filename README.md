@@ -2,6 +2,7 @@
 ## Overview
 
 This is a boilerplate application for building REST APIs with Express, Mongoose, permission based JWT Authentication and Mocha tests.
+Created with attempting to follow [Node.js Best Practices](https://github.com/goldbergyoni/nodebestpractices) as closely as possible.
 
 ### Features
 
@@ -43,7 +44,8 @@ Set environment (vars):
 cp .env.example .env
 ```
 
-Seed database with a user:
+Seed database with a test admin and user:
+(Not a best practice but these users are needed in `yarn test` to get the jwt)
 ```sh
 yarn seed
 ```
@@ -95,20 +97,53 @@ yarn lint:watch
 
 ```
 ## Routes
-Protected Routes require a jwt header to access
+Protected Routes require a jwt header to access and the listed permission on the user
 Authorization: Bearer {token}
 
-### Auth
+#### Auth
 * POST /api/auth/login - Returns token if correct username and password is provided
-* GET /api/auth/random-number - Example route that return a random number **protected route**
+* GET /api/auth/random-number - Example route that return a random number **protected route** (no permission required)
 
-### User
-* GET /api/users - Get list of users **protected route**
-* POST /api/users - Create new user
+#### User
+* GET /api/users - Get list of users **protected route** (admin permission required)
+* POST /api/users - Create new user **protected route** (admin permission required)
 
-* GET /api/users/:userId - Get user
-* PUT /api/users/:userId - Update user
-* DELETE /api/users/:userId - Delete user
+* GET /api/users/:userId - Get user **protected route** (admin permission required)
+* PUT /api/users/:userId - Update user **protected route** (admin permission required)
+* DELETE /api/users/:userId - Delete user **protected route** (admin permission required)
+
+#### Thing
+* GET /api/things - Get list of things **public route** (no permission required)
+* POST /api/things - Create new thing **protected route** (admin or user permission required)
+
+* GET /api/things/:thingId - Get thing **public route** (no permission required)
+* PUT /api/things/:thingId - Update thing **protected route** (admin permission required)
+* DELETE /api/things/:thingId - Delete thing **protected route** (admin permission required)
+
+## Project Structure
+
+### Layered Component based
+
+Folders under the /server directory are organized into self-contained components that don't share files with others, each constitutes very few files (e.g. models, routes, controllers, services, test, etc.) so that it's very easy to reason about it. This not only draws a clean separation of concerns but also significantly eases mocking and testing the system.
+
+\*.model.js
+: Defines db model used by mongoose
+
+\*.route.js
+: Uses an `express.Router()` to define the endpoint, register middleware and then calls the component controller
+
+\*.controller.js
+: Sets up any req variables, then calls the services and handles the res back to the route
+
+\*.service.js
+: Handles any business logic or db calls
+(ideally db abstractions should be their own layer and then called by the service layer)
+
+\*.test.js
+: Defines all test for the Component
+
+
+###
 
 
 ## Logging

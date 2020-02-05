@@ -12,6 +12,7 @@ const expressWinston = require('express-winston');
 const expressValidation = require('express-validation');
 const helmet = require('helmet');
 const mongoose = require('mongoose');
+
 const winstonInstance = require('./config/winston');
 const routes = require('./index.route');
 const config = require('./config/config');
