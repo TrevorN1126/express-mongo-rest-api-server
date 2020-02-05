@@ -4,7 +4,7 @@ const commonMiddleware = require('./config/common-middleware')
 
 const config = require('./config/config');
 const winstonInstance = require('./config/winston');
-const InitiateMongoServer = require("./config/db");
+const MongoServer = require("./config/db");
 const routes = require('./config/routes');
 
 const httpStatus = require('http-status');
@@ -13,7 +13,7 @@ const expressValidation = require('express-validation');
 const APIError = require('./server/helpers/APIError');
 
 // Initiate Mongo Server
-InitiateMongoServer();
+MongoServer.initiate();
 
 // Create Express App
 const app = express();
