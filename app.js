@@ -1,61 +1,29 @@
 const express = require('express');
-const util = require('util');
-const debug = require('debug')('express-rest-api-server:app');
 const logger = require('morgan');
-const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
-const compress = require('compression');
-const methodOverride = require('method-override');
-const cors = require('cors');
+const commonMiddleware = require('./config/common-middleware')
+
+const config = require('./config/config');
+const winstonInstance = require('./config/winston');
+const InitiateMongoServer = require("./config/db");
+const routes = require('./config/routes');
+
 const httpStatus = require('http-status');
 const expressWinston = require('express-winston');
 const expressValidation = require('express-validation');
-const helmet = require('helmet');
-const mongoose = require('mongoose');
-
-const winstonInstance = require('./config/winston');
-const routes = require('./index.route');
-const config = require('./config/config');
 const APIError = require('./server/helpers/APIError');
 
+// Initiate Mongo Server
+InitiateMongoServer();
 
-// connect to mongo db
-const mongoUri = config.mongo.host;
-mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.connection.on('error', () => {
-  throw new Error(`unable to connect to database: ${mongoUri}`);
-});
-
-
-// print mongoose logs in dev env
-if (config.mongooseDebug) {
-  mongoose.set('debug', (collectionName, method, query, doc) => {
-    debug(`${collectionName}.${method}`, util.inspect(query, false, 20), doc);
-  });
-}
-
+// Create Express App
 const app = express();
 
+/**
+* Logging
+*/
 if (config.env === 'development') {
   app.use(logger('dev'));
 }
-
-// parse body params and attache them to req.body
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
-app.use(cookieParser());
-app.use(compress());
-app.use(methodOverride());
-
-// secure apps by setting various HTTP headers
-app.use(helmet());
-
-// enable CORS - Cross Origin Resource Sharing
-app.use(cors());
-
-// mount all routes on /api path
-app.use('/api', routes);
 
 // enable detailed API logging in dev env
 if (config.env === 'development') {
@@ -69,6 +37,20 @@ if (config.env === 'development') {
   }));
 }
 
+/**
+* Common Middleware
+*/
+app.use(commonMiddleware);
+
+/**
+* Routes Middleware
+* mount all api routes on /api path
+*/
+app.use('/api', routes);
+
+/**
+* Error Handling
+*/
 // if error is not an instanceOf APIError, convert it.
 app.use((err, req, res, next) => {
   if (err instanceof expressValidation.ValidationError) {
