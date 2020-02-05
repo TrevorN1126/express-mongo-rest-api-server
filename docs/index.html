@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Documentation Index</title>
+
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+
+	<link type="text/css" rel="stylesheet" href="styles/site.simplex.css">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top ">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="index.html">Documentation</a>
+		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+        </button>
+	</div>
+	<div class="navbar-collapse collapse" id="topNavigation">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="APIError.html">APIError</a></li><li><a href="ExtendableError.html">ExtendableError</a></li><li><a href="ThingService.html">ThingService</a></li><li><a href="UserService.html">UserService</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="global.html" class="dropdown-toggle" data-toggle="dropdown">Global<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="global.html#create">create</a></li><li><a href="global.html#get">get</a></li><li><a href="global.html#getRandomNumber">getRandomNumber</a></li><li><a href="global.html#list">list</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#remove">remove</a></li><li><a href="global.html#ThingSchema">ThingSchema</a></li><li><a href="global.html#update">update</a></li><li><a href="global.html#UserSchema">UserSchema</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+        
+            <div class="col-sm-3 col-md-3">
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="q" id="search-input">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" id="search-submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+	</div>
+
+</div>
+</div>
+
+
+<div class="container" id="toc-content">
+<div class="row">
+
+	
+	<div class="col-md-8">
+	
+		<div id="main">
+			
+
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+
+
+
+
+
+    <section class="readme-section">
+        <article><h1>Express Rest API Server Boilerplate</h1>
+<h2>Overview</h2>
+<p>This is a boilerplate application for building REST APIs with Express, Mongoose, permission based JWT Authentication and Mocha tests.
+Created with attempting to follow <a href="https://github.com/goldbergyoni/nodebestpractices">Node.js Best Practices</a> as closely as possible.</p>
+<h3>Features</h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Summary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Authentication via JsonWebToken</td>
+<td>Supports authentication using <a href="https://www.npmjs.com/package/jsonwebtoken">jsonwebtoken</a>.</td>
+</tr>
+<tr>
+<td>Code Linting</td>
+<td>JavaScript code linting is done using <a href="http://eslint.org">ESLint</a> - a pluggable linter tool for identifying and reporting on patterns in JavaScript. Uses ESLint with <a href="https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb">eslint-config-airbnb</a>, which tries to follow the Airbnb JavaScript style guide.</td>
+</tr>
+<tr>
+<td>Auto server restart</td>
+<td>Restart the server using <a href="https://github.com/remy/nodemon">nodemon</a> in real-time anytime an edit is made, with babel compilation and eslint.</td>
+</tr>
+<tr>
+<td>Debugging via <a href="https://www.npmjs.com/package/debug">debug</a></td>
+<td>Instead of inserting and deleting console.log you can replace it with the debug function and just leave it there. You can then selectively debug portions of your code by setting DEBUG env variable. If DEBUG env variable is not set, nothing is displayed to the console.</td>
+</tr>
+<tr>
+<td>API parameter validation via <a href="https://www.npmjs.com/package/express-validation">express-validation</a></td>
+<td>Validate body, params, query, headers and cookies of a request (via middleware) and return a response with errors; if any of the configured validation rules fail. You won't anymore need to make your route handler dirty with such validations.</td>
+</tr>
+<tr>
+<td>Pre-commit hooks</td>
+<td>Runs lint and tests before any commit is made locally, making sure that only tested and quality code is committed</td>
+</tr>
+<tr>
+<td>Secure app via <a href="https://github.com/helmetjs/helmet">helmet</a></td>
+<td>Helmet helps secure Express apps by setting various HTTP headers.</td>
+</tr>
+<tr>
+<td>Uses <a href="https://yarnpkg.com">yarn</a> over npm</td>
+<td>Uses new released yarn package manager by facebook. You can read more about it <a href="https://code.facebook.com/posts/1840075619545360">here</a></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>CORS support via <a href="https://github.com/expressjs/cors">cors</a></li>
+<li>Uses <a href="https://www.npmjs.com/package/http-status">http-status</a> to set http status code. It is recommended to use <code>httpStatus.INTERNAL_SERVER_ERROR</code> instead of directly using <code>500</code> when setting status code.</li>
+<li>Has <code>.editorconfig</code> which helps developers define and maintain consistent coding styles between different editors and IDEs.</li>
+</ul>
+<h2>Getting Started</h2>
+<p>Clone the repo:</p>
+<pre class="prettyprint source lang-sh"><code>git clone https://github.com/TrevorN1126/express-rest-api-server.git
+cd express-rest-api-server
+</code></pre>
+<p>Install yarn:</p>
+<pre class="prettyprint source lang-js"><code>npm install -g yarn
+</code></pre>
+<p>Install dependencies:</p>
+<pre class="prettyprint source lang-sh"><code>yarn
+</code></pre>
+<p>Set environment (vars):</p>
+<pre class="prettyprint source lang-sh"><code>cp .env.example .env
+</code></pre>
+<p>Seed database with a test admin and user:
+(Not a best practice but these users are needed in <code>yarn test</code> to get the jwt)</p>
+<pre class="prettyprint source lang-sh"><code>yarn seed
+</code></pre>
+<p>Start server:</p>
+<pre class="prettyprint source lang-sh"><code># Start server
+yarn start
+
+# start server with nodemon
+yarn start-dev
+
+# Selectively set DEBUG env var to get logs
+DEBUG=express-rest-api-server:* yarn start
+</code></pre>
+<p>Refer <a href="https://www.npmjs.com/package/debug">debug</a> to know how to selectively turn on logs.</p>
+<p>Tests:</p>
+<pre class="prettyprint source lang-sh"><code># Run tests written in ES6
+yarn test
+
+# Run tests on file change
+yarn test:watch
+
+</code></pre>
+<p>Lint:</p>
+<pre class="prettyprint source lang-sh"><code># Lint code with ESLint
+yarn lint
+
+# Run lint on any file change
+yarn lint:watch
+</code></pre>
+<h5>Deployment</h5>
+<pre class="prettyprint source lang-sh"><code># compile to ES5
+1. yarn build
+
+# upload dist/ to your server
+2. scp -rp dist/ user@dest:/path
+
+# install production dependencies only
+3. yarn --production
+
+</code></pre>
+<h2>Routes</h2>
+<p>Protected Routes require a jwt header to access and the listed permission on the user
+Authorization: Bearer {token}</p>
+<h4>Auth</h4>
+<ul>
+<li>POST /api/auth/login - Returns token if correct username and password is provided</li>
+<li>GET /api/auth/random-number - Example route that return a random number <strong>protected route</strong> (no permission required)</li>
+</ul>
+<h4>User</h4>
+<ul>
+<li>
+<p>GET /api/users - Get list of users <strong>protected route</strong> (admin permission required)</p>
+</li>
+<li>
+<p>POST /api/users - Create new user <strong>protected route</strong> (admin permission required)</p>
+</li>
+<li>
+<p>GET /api/users/:userId - Get user <strong>protected route</strong> (admin permission required)</p>
+</li>
+<li>
+<p>PUT /api/users/:userId - Update user <strong>protected route</strong> (admin permission required)</p>
+</li>
+<li>
+<p>DELETE /api/users/:userId - Delete user <strong>protected route</strong> (admin permission required)</p>
+</li>
+</ul>
+<h4>Thing</h4>
+<ul>
+<li>
+<p>GET /api/things - Get list of things <strong>public route</strong> (no permission required)</p>
+</li>
+<li>
+<p>POST /api/things - Create new thing <strong>protected route</strong> (admin or user permission required)</p>
+</li>
+<li>
+<p>GET /api/things/:thingId - Get thing <strong>public route</strong> (no permission required)</p>
+</li>
+<li>
+<p>PUT /api/things/:thingId - Update thing <strong>protected route</strong> (admin permission required)</p>
+</li>
+<li>
+<p>DELETE /api/things/:thingId - Delete thing <strong>protected route</strong> (admin permission required)</p>
+</li>
+</ul>
+<h2>Project Structure</h2>
+<h3>Layered Component based</h3>
+<p>Folders under the /server directory are organized into self-contained components that don't share files with others, each constitutes very few files (e.g. models, routes, controllers, services, test, etc.) so that it's very easy to reason about it. This not only draws a clean separation of concerns but also significantly eases mocking and testing the system.</p>
+<p>*.model.js
+: Defines db model used by mongoose</p>
+<p>*.route.js
+: Uses an <code>express.Router()</code> to define the endpoint, register middleware and then calls the component controller</p>
+<p>*.controller.js
+: Sets up any req variables, then calls the services and handles the res back to the route</p>
+<p>*.service.js
+: Handles any business logic or db calls
+(ideally db abstractions should be their own layer and then called by the service layer)</p>
+<p>*.test.js
+: Defines all test for the Component</p>
+<h2>Logging</h2>
+<p>Universal logging library <a href="https://www.npmjs.com/package/winston">winston</a> is used for logging. It has support for multiple transports.  A transport is essentially a storage device for your logs. Each instance of a winston logger can have multiple transports configured at different levels. For example, one may want error logs to be stored in a persistent remote location (like a database), but all logs output to the console or a local file. We just log to the console for simplicity, you can configure more transports as per your requirement.</p>
+<h4>API logging</h4>
+<p>Logs detailed info about each api request to console during development.</p>
+<h4>Error logging</h4>
+<p>Logs stacktrace of error to console along with other details. You should ideally store all error messages persistently.</p>
+<h2>Contributing</h2>
+<p>For code contributions submit a pull request with unit test.</p>
+<h2>License</h2>
+<p>This project is licensed under the MIT License</p></article>
+    </section>
+
+
+
+
+
+
+
+	<h1 class="page-title">Index</h1>
+<section>
+
+<header>
+    
+        <h2>
+        user/user.controller.js
+        </h2>
+        
+    
+</header>
+
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description">user.controller.js Controller for the user component</div>
+        
+
+        
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+	<h1 class="page-title">Index</h1>
+<section>
+
+<header>
+    
+        <h2>
+        user/user.service.js
+        </h2>
+        
+    
+</header>
+
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description">user.service.js Service for the user component</div>
+        
+
+        
+<dl class="details">
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+		<div class="col-md-3">
+			<div id="toc" class="col-md-3 hidden-xs hidden-sm hidden-md"></div>
+		</div>
+	
+
+</div>
+</div>
+
+
+    <div class="modal fade" id="searchResults">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Search results</h4>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div>
+
+
+<footer>
+
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a>
+	
+		on 2020-02-04T23:05:52-05:00
+	
+	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
+</span>
+</footer>
+
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/toc.js"></script>
+
+    <script type="text/javascript" src="scripts/fulltext-search-ui.js"></script>
+
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+	$( ".tutorial-section pre, .readme-section pre, pre.prettyprint.source" ).each( function () {
+		var $this = $( this );
+
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			var langClassMatch = example.parent()[0].className.match(/lang\-(\S+)/);
+			lang = langClassMatch ? langClassMatch[1] : "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : false,
+		showMenu : true,
+		enableDoclinks : true
+	} );
+
+	$.catchAnchorLinks( {
+        navbarOffset: 10
+	} );
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			return $( heading ).attr( "id" ) || ( prefix + i );
+		},
+		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
+		showAndHide : false,
+		smoothScrolling: true
+	} );
+
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+
+    $( "table" ).each( function () {
+      var $this = $( this );
+      $this.addClass('table');
+    } );
+
+} );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+
+<!--Google Analytics-->
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            SearcherDisplay.init();
+        });
+    </script>
+
+
+</body>
+</html>

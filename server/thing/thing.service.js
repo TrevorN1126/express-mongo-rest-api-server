@@ -1,5 +1,9 @@
 const ThingModel = require('./thing.model');
 
+/**
+ * Creates a new ThingService.
+ * @class
+ */
 class ThingService {
 
   async Create(thing) {

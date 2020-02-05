@@ -18,7 +18,8 @@
     "precommit": "yarn lint && yarn test",
     "test": "cross-env NODE_ENV=test ./node_modules/.bin/mocha --ui bdd --reporter spec --colors server --recursive",
     "test:watch": "yarn test -- --watch",
-    "test:coverage": "nyc --reporter=lcov --reporter=text yarn test"
+    "test:coverage": "nyc --reporter=lcov --reporter=text yarn test",
+    "docs": "./node_modules/.bin/jsdoc server -t ./node_modules/ink-docstrap/template -R README.md -r -d docs"
   },
   "dependencies": {
     "bcrypt": "^3.0.7",
@@ -57,13 +58,13 @@
     "eslint-watch": "6.0.1",
     "gulp": "false4.0.2",
     "husky": "4.2.1",
+    "ink-docstrap": "false1.3.2",
     "istanbul": "1.1.0-alpha.1",
     "jsdoc": "false3.6.3",
     "mocha": "7.0.1",
     "nodemon": "false2.0.2",
     "nyc": "false15.0.0",
     "supertest": "4.0.2",
-    "supertest-as-promised": "4.0.2",
     "validate-commit-msg": "^2.14.0"
   },
   "license": "MIT"
