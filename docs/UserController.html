@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>Documentation Class: UserService</title>
+	<title>Documentation Class: UserController</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -72,16 +72,16 @@
 		<div id="main">
 			
 
-	<h1 class="page-title">Class: UserService</h1>
+	<h1 class="page-title">Class: UserController</h1>
 <section>
 
 <header>
     
         <h2>
-        UserService
+        UserController
         </h2>
         
-            <div class="class-description">Creates a new UserService.</div>
+            <div class="class-description">UserController Class.</div>
         
     
 </header>
@@ -93,7 +93,7 @@
         
 <hr>
 <dt>
-    <h4 class="name" id="UserService"><span class="type-signature"></span>new UserService()</h4>
+    <h4 class="name" id="UserController"><span class="type-signature"></span>new UserController()</h4>
     
     
 </dt>
@@ -185,7 +185,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="Create"><span class="type-signature">&lt;async> </span>Create()</h4>
+    <h4 class="name" id="create"><span class="type-signature">&lt;async> </span>create()</h4>
     
     
 </dt>
@@ -193,7 +193,7 @@
 
     
     <div class="description">
-        Create a new user
+        Create new user
     </div>
     
 
@@ -206,6 +206,107 @@
 
     
 <dl class="details">
+    
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    <dl>
+
+<table class="props table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>req.body.username</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The username of user.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>req.body.password</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The password of user.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>req.body.permissions</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;string></span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Array of strings for the permissions</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+</dl>
+
     
 
 	
@@ -258,10 +359,6 @@
     <h5>Returns:</h5>
     
             
-<div class="param-desc">
-    user
-</div>
-
 
 
 <dl>
@@ -270,7 +367,7 @@
     </dt>
     <dd>
         
-<span class="param-type">object</span>
+<span class="param-type"><a href="global.html#User">User</a></span>
 
 
 
@@ -287,7 +384,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="GetUser"><span class="type-signature">&lt;async> </span>GetUser()</h4>
+    <h4 class="name" id="get"><span class="type-signature">&lt;async> </span>get()</h4>
     
     
 </dt>
@@ -295,7 +392,7 @@
 
     
     <div class="description">
-        Get a user
+        Get an existing user
     </div>
     
 
@@ -308,6 +405,59 @@
 
     
 <dl class="details">
+    
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    <dl>
+
+<table class="props table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>req.params.userId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The _id of user.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+</dl>
+
     
 
 	
@@ -360,10 +510,6 @@
     <h5>Returns:</h5>
     
             
-<div class="param-desc">
-    user
-</div>
-
 
 
 <dl>
@@ -372,7 +518,7 @@
     </dt>
     <dd>
         
-<span class="param-type">object</span>
+<span class="param-type"><a href="global.html#User">User</a></span>
 
 
 
@@ -389,7 +535,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="List"><span class="type-signature">&lt;async> </span>List()</h4>
+    <h4 class="name" id="list"><span class="type-signature">&lt;async> </span>list()</h4>
     
     
 </dt>
@@ -397,7 +543,7 @@
 
     
     <div class="description">
-        Get a list of all users
+        Get user list.
     </div>
     
 
@@ -410,6 +556,83 @@
 
     
 <dl class="details">
+    
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    <dl>
+
+<table class="props table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>req.query.skip</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Number of users to be skipped.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>req.query.limit</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Limit number of users to be returned.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+</dl>
+
     
 
 	
@@ -462,10 +685,6 @@
     <h5>Returns:</h5>
     
             
-<div class="param-desc">
-    user - An array of users
-</div>
-
 
 
 <dl>
@@ -474,7 +693,7 @@
     </dt>
     <dd>
         
-<span class="param-type">Array.&lt;object></span>
+<span class="param-type">Array.&lt;<a href="global.html#User">User</a>></span>
 
 
 
@@ -491,7 +710,7 @@
             
 <hr>
 <dt>
-    <h4 class="name" id="Update"><span class="type-signature">&lt;async> </span>Update()</h4>
+    <h4 class="name" id="remove"><span class="type-signature">&lt;async> </span>remove()</h4>
     
     
 </dt>
@@ -499,7 +718,7 @@
 
     
     <div class="description">
-        Update a user
+        Delete user.
     </div>
     
 
@@ -512,6 +731,59 @@
 
     
 <dl class="details">
+    
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    <dl>
+
+<table class="props table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>req.params.userId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The _id of user.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+</dl>
+
     
 
 	
@@ -564,10 +836,6 @@
     <h5>Returns:</h5>
     
             
-<div class="param-desc">
-    user
-</div>
-
 
 
 <dl>
@@ -576,7 +844,182 @@
     </dt>
     <dd>
         
+<span class="param-type"><a href="global.html#User">User</a></span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id="update"><span class="type-signature">&lt;async> </span>update()</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        Update existing user
+    </div>
+    
+
+    
+
+    
+
+    
+    
+
+    
+<dl class="details">
+    
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    <dl>
+
+<table class="props table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>req.params.userId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The _id of user.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>req.body</code></td>
+            
+
+            <td class="type">
+            
+                
 <span class="param-type">object</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Object containing new values for the user.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+</dl>
+
+    
+
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="global.html#User">User</a></span>
 
 
 
