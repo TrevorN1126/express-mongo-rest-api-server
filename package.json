@@ -22,6 +22,7 @@
     "docs": "./node_modules/.bin/jsdoc server -t ./node_modules/ink-docstrap/template -R README.md -r -d docs"
   },
   "dependencies": {
+    "@hapi/joi": "false17.1.0",
     "bcrypt": "^3.0.7",
     "body-parser": "1.19.0",
     "compression": "1.7.4",
@@ -32,11 +33,11 @@
     "express": "4.17.1",
     "express-jwt": "5.3.1",
     "express-jwt-permissions": "false1.3.3",
-    "express-validation": "1.0.3",
+    "express-validation": "false1.0.3",
     "express-winston": "4.0.2",
     "helmet": "3.21.2",
     "http-status": "1.4.2",
-    "joi": "14.3.1",
+    "joi": "false14.3.1",
     "jsonwebtoken": "8.5.1",
     "method-override": "^3.0.0",
     "mongoose": "5.8.10",

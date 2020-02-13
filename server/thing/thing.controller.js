@@ -106,4 +106,4 @@ class ThingController {
 }
 
 
-module.exports = ThingController;
+module.exports = new ThingController();

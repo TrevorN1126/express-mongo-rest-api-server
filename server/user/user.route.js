@@ -6,23 +6,21 @@ const protectRoute = require('../middleware/protectRoute');
 
 const router = express.Router(); // eslint-disable-line new-cap
 
-const UserControllerInstance = new UserController();
-
 router.route('/')
   /** GET /api/users - Get list of users */
-  .get(protectRoute(['admin']), UserControllerInstance.list)
+  .get(protectRoute(['admin']), UserController.list)
 
   /** POST /api/users - Create new user */
-  .post(protectRoute(['admin']), validate(paramValidation.createUser), UserControllerInstance.create);
+  .post(protectRoute(['admin']), validate(paramValidation.createUser), UserController.create);
 
 router.route('/:userId')
   /** GET /api/users/:userId - Get user */
-  .get(protectRoute(['admin']), UserControllerInstance.get)
+  .get(protectRoute(['admin']), UserController.get)
 
   /** PUT /api/users/:userId - Update user */
-  .put(protectRoute(['admin']), validate(paramValidation.updateUser), UserControllerInstance.update)
+  .put(protectRoute(['admin']), validate(paramValidation.updateUser), UserController.update)
 
   /** DELETE /api/users/:userId - Delete user */
-  .delete(protectRoute(['admin']), UserControllerInstance.remove);
+  .delete(protectRoute(['admin']), UserController.remove);
 
 module.exports = router;
