@@ -2,8 +2,6 @@ const httpStatus = require('http-status');
 const APIError = require('../helpers/APIError');
 
 const ThingService = require('./thing.service');
-const ThingServiceInstance = new ThingService();
-
 
   /**
    * Create new thing
@@ -12,7 +10,7 @@ const ThingServiceInstance = new ThingService();
    * @returns {Thing}
    */
   async function create(req, res, next) {
-
+    let ThingServiceInstance = new ThingService();
     const newThing = req.body;
 
     try {
@@ -30,7 +28,7 @@ const ThingServiceInstance = new ThingService();
    * @returns {Thing}
    */
   async function get(req, res, next) {
-
+    let ThingServiceInstance = new ThingService();
     const thingId = req.params.thingId;
 
     try {
@@ -50,7 +48,7 @@ const ThingServiceInstance = new ThingService();
    * @returns {Thing}
    */
   async function update(req, res, next) {
-
+    let ThingServiceInstance = new ThingService();
     const thingId = req.params.thingId;
     const newValues = req.body;
 
@@ -68,7 +66,7 @@ const ThingServiceInstance = new ThingService();
    * @returns {Thing[]}
    */
   async function list(req, res, next) {
-
+    let ThingServiceInstance = new ThingService();
     try {
       const thingList = await ThingServiceInstance.List();
       return res.json(thingList);
@@ -83,7 +81,7 @@ const ThingServiceInstance = new ThingService();
    * @returns {Thing}
    */
   async function remove(req, res, next) {
-
+    let ThingServiceInstance = new ThingService();
     const thingId = req.params.thingId;
 
     try {

@@ -3,7 +3,6 @@ const httpStatus = require('http-status');
 const APIError = require('../helpers/APIError');
 
 const UserService = require('./user.service');
-const UserServiceInstance = new UserService();
 
 
 /**
@@ -14,7 +13,7 @@ const UserServiceInstance = new UserService();
  * @returns {User}
  */
 async function create(req, res, next) {
-
+  let UserServiceInstance = new UserService();
   const newUser = {
     username: req.body.username,
     password: req.body.password,
@@ -41,7 +40,7 @@ async function create(req, res, next) {
  * @returns {User}
  */
 async function get(req, res, next) {
-
+  let UserServiceInstance = new UserService();
   const userId = req.params.userId;
 
   try {
@@ -61,7 +60,7 @@ async function get(req, res, next) {
  * @returns {User}
  */
 async function update(req, res, next) {
-
+  let UserServiceInstance = new UserService();
   const userId = req.params.userId;
   const newValues = req.body;
 
@@ -81,7 +80,7 @@ async function update(req, res, next) {
  * @returns {User[]}
  */
 async function list(req, res, next) {
-
+  let UserServiceInstance = new UserService();
   try {
     const userList = await UserServiceInstance.List();
     return res.json(userList);
@@ -97,7 +96,7 @@ async function list(req, res, next) {
  * @returns {User}
  */
 async function remove(req, res, next) {
-
+  let UserServiceInstance = new UserService();
   const userId = req.params.userId;
 
   try {
