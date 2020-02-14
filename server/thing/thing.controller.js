@@ -4,11 +4,6 @@ const APIError = require('../helpers/APIError');
 const ThingService = require('./thing.service');
 const ThingServiceInstance = new ThingService();
 
-/**
- * @classdesc ThingController Class.
- *
- */
-class ThingController {
 
   /**
    * Create new thing
@@ -16,12 +11,9 @@ class ThingController {
    * @property {string} req.body.description - The description of a thing.
    * @returns {Thing}
    */
-  async create(req, res, next) {
+  async function create(req, res, next) {
 
-    const newThing = {
-      name: req.body.name,
-      description: req.body.description
-    };
+    const newThing = req.body;
 
     try {
       const savedThing = await ThingServiceInstance.Create(newThing);
@@ -37,7 +29,7 @@ class ThingController {
    * @property {string} req.params.thingId - The _id of thing.
    * @returns {Thing}
    */
-  async get(req, res, next) {
+  async function get(req, res, next) {
 
     const thingId = req.params.thingId;
 
@@ -57,7 +49,7 @@ class ThingController {
    * @property {object} req.body - Object containing new values for the thing.
    * @returns {Thing}
    */
-  async update(req, res, next) {
+  async function update(req, res, next) {
 
     const thingId = req.params.thingId;
     const newValues = req.body;
@@ -75,7 +67,7 @@ class ThingController {
    * Get thing list.
    * @returns {Thing[]}
    */
-  async list(req, res, next) {
+  async function list(req, res, next) {
 
     try {
       const thingList = await ThingServiceInstance.List();
@@ -90,7 +82,7 @@ class ThingController {
    * Delete thing.
    * @returns {Thing}
    */
-  async remove(req, res, next) {
+  async function remove(req, res, next) {
 
     const thingId = req.params.thingId;
 
@@ -103,7 +95,5 @@ class ThingController {
 
   }
 
-}
 
-
-module.exports = new ThingController();
+module.exports = { create, get, update, list, remove };
