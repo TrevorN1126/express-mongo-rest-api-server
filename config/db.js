@@ -1,29 +1,37 @@
 const mongoose = require('mongoose');
 const config = require('./config');
-const debug = require('debug')('express-rest-api-server:app');
+const debug = require('debug')('express-rest-api-server:db');
 const util = require('util');
 
 
 class MongoServer {
 
-  async initiate (){
-    try {
-      // connect to mongo db
-      const mongoUri = config.mongo.host;
-      await mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true });
-      mongoose.connection.on('error', () => {
-        throw new Error(`unable to connect to database: ${mongoUri}`);
+  initiate (){
+    // connect to mongo db
+    const mongoUri = config.mongo.host;
+    mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true });
+    mongoose.connection.once('open', function(){
+      console.log("Mongoose default connection is open to ", mongoUri);
+    });
+    mongoose.connection.on('error', () => {
+      throw new Error(`unable to connect to database: ${mongoUri}`);
+    });
+    // print mongoose logs in dev env
+    if (config.mongooseDebug) {
+      mongoose.set('debug', (collectionName, method, query, doc) => {
+        debug(`${collectionName}.${method}`, util.inspect(query, false, 20), doc);
       });
-      // print mongoose logs in dev env
-      if (config.mongooseDebug) {
-        mongoose.set('debug', (collectionName, method, query, doc) => {
-          debug(`${collectionName}.${method}`, util.inspect(query, false, 20), doc);
-        });
-      }
-    } catch (e) {
-      throw e;
     }
   }
+
+  close(){
+    const mongoUri = config.mongo.host;
+    mongoose.disconnect();
+    mongoose.connection.on('disconnected', () => {
+      console.log("connection closed");;
+    });
+  }
+
 }
 
 
