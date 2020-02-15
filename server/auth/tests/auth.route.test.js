@@ -2,7 +2,7 @@ const request = require('supertest');
 const httpStatus = require('http-status');
 const chai = require('chai'); // eslint-disable-line import/newline-after-import
 const { expect } = chai;
-const app = require('../../app');
+const app = require('../../../app');
 
 chai.config.includeStack = true;
 
