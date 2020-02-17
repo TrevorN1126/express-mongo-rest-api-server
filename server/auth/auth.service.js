@@ -19,8 +19,10 @@ class AuthService {
       const user = await this.model.findOne({
         username: username
       });
+      if (!user) throw Error('User not found.');
+
       const passwordIsValid = bcrypt.compareSync(password, user.password);
-      if (!passwordIsValid) throw Error("Invalid username/password")
+      if (!passwordIsValid) throw Error("Invalid password.")
 
       const token = jwt.sign(
         {user},
@@ -35,7 +37,7 @@ class AuthService {
       };
     } catch (e) {
       // return a Error message describing the reason
-      throw Error("Error while Login User")
+      return e;
     }
   }
 

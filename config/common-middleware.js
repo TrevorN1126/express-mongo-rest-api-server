@@ -13,4 +13,4 @@ module.exports = [
   methodOverride(),
   helmet(), // secure apps by setting various HTTP headers
   cors(), // enable CORS - Cross Origin Resource Sharing
-]
+];

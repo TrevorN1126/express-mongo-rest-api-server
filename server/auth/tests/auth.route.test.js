@@ -6,7 +6,7 @@ const app = require('../../../app');
 
 chai.config.includeStack = true;
 
-describe('## Auth APIs', () => {
+describe('## Auth Routes', () => {
   const validUserCredentials = {
     username: 'TestUser',
     password: 'password'

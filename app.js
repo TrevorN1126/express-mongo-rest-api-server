@@ -1,15 +1,15 @@
 const express = require('express');
 const logger = require('morgan');
-const commonMiddleware = require('./config/common-middleware')
-
-const config = require('./config/config');
-const winstonInstance = require('./config/winston');
-const MongoServer = require("./config/db");
-const routes = require('./config/routes');
-
 const httpStatus = require('http-status');
 const expressWinston = require('express-winston');
 const expressValidation = require('express-validation');
+const commonMiddleware = require('./config/common-middleware');
+
+const config = require('./config/config');
+const winstonInstance = require('./config/winston');
+const MongoServer = require('./config/db');
+const routes = require('./config/routes');
+
 const APIError = require('./server/helpers/APIError');
 
 // Initiate Mongo Server

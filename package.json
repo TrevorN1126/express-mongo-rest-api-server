@@ -15,7 +15,6 @@
     "start:debug": "cross-env DEBUG=express-rest-api-server:* yarn start",
     "lint": "esw *.js server config --color",
     "lint:watch": "yarn lint -- --watch",
-    "precommit": "yarn lint && yarn test",
     "test": "cross-env NODE_ENV=test ./node_modules/.bin/mocha --ui bdd --reporter spec --colors server --recursive",
     "test:watch": "yarn test -- --watch",
     "test:coverage": "nyc --reporter=lcov --reporter=text yarn test",
@@ -65,8 +64,14 @@
     "mocha": "7.0.1",
     "nodemon": "false2.0.2",
     "nyc": "false15.0.0",
+    "pre-commit": "false1.2.2",
     "supertest": "4.0.2",
     "validate-commit-msg": "^2.14.0"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn test"
+    }
+  }
 }

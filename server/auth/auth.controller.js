@@ -1,9 +1,6 @@
-const jwt = require('jsonwebtoken');
 const httpStatus = require('http-status');
 const APIError = require('../helpers/APIError');
-const config = require('../../config/config');
 
-const User = require('../user/user.model');
 const AuthService = require('./auth.service');
 
 
@@ -20,9 +17,10 @@ async function login(req, res, next) {
 
   try {
     const userAuth = await AuthService.Login(username, password);
+    if (!userAuth.success) throw new APIError('Authentication failed. ' + userAuth.message, httpStatus.UNAUTHORIZED, true);
     return res.json( userAuth );
   } catch (e) {
-    return res.json(e)
+    return next(e);
   }
 }
 

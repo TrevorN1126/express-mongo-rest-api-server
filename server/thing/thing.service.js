@@ -5,10 +5,10 @@ const ThingModel = require('./thing.model');
  * Creates a new ThingService.
  * @class
  */
- class ThingService extends DbService {
-   constructor(model) {
-     super(model);
-   }
- }
+class ThingService extends DbService {
+  constructor(model) {
+    super(model);
+  }
+}
 
 module.exports = new ThingService(ThingModel);
