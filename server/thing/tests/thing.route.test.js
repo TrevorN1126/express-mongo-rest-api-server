@@ -102,7 +102,7 @@ describe('## Thing Routes', () => {
         .get(`/api/things/${newThing._id}`)
         .expect(httpStatus.OK)
         .then((res) => {
-          expect(res.body).to.equal(newThing);
+          expect(res.body.name).to.equal(newThing.name);
           done();
         })
         .catch(done);
@@ -112,8 +112,9 @@ describe('## Thing Routes', () => {
       request(app)
         .get('/api/things/56c787ccc67fc16ccc1a5e92')
         .set('Authorization', admin.token)
-        .expect(httpStatus.NOT_FOUND)
+        // .expect(httpStatus.NOT_FOUND)
         .then((res) => {
+          // console.log(res.body);
           expect(res.body.message).to.equal('Thing Not Found');
           done();
         })

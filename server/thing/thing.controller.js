@@ -10,11 +10,10 @@ const ThingService = require('./thing.service');
    * @returns {Thing}
    */
   async function create(req, res, next) {
-    let ThingServiceInstance = new ThingService();
     const newThing = req.body;
 
     try {
-      const savedThing = await ThingServiceInstance.Create(newThing);
+      const savedThing = await ThingService.Create(newThing);
       return res.json( savedThing );
     } catch (e) {
       return res.json(e)
@@ -28,16 +27,14 @@ const ThingService = require('./thing.service');
    * @returns {Thing}
    */
   async function get(req, res, next) {
-    let ThingServiceInstance = new ThingService();
     const thingId = req.params.thingId;
 
-    try {
-      const thing = await ThingServiceInstance.GetThing(thingId);
-      return res.json(thing);
-    } catch (e) {
+    const thing = await ThingService.GetById(thingId);
+    if (thing.message === 'Item not found') {
       const error = new APIError('Thing Not Found', httpStatus.NOT_FOUND, true);
       return next(error);
     }
+    return res.json(thing);
 
   }
 
@@ -48,15 +45,15 @@ const ThingService = require('./thing.service');
    * @returns {Thing}
    */
   async function update(req, res, next) {
-    let ThingServiceInstance = new ThingService();
     const thingId = req.params.thingId;
     const newValues = req.body;
 
     try {
-      const updatedThing = await ThingServiceInstance.Update(thingId, newValues);
+      const updatedThing = await ThingService.Update(thingId, newValues);
       return res.json(updatedThing);
     } catch (e) {
-      return res.json(e)
+      const error = new APIError('Thing Not Found', httpStatus.NOT_FOUND, true);
+      return next(error);
     }
 
   }
@@ -66,9 +63,9 @@ const ThingService = require('./thing.service');
    * @returns {Thing[]}
    */
   async function list(req, res, next) {
-    let ThingServiceInstance = new ThingService();
+
     try {
-      const thingList = await ThingServiceInstance.List();
+      const thingList = await ThingService.List();
       return res.json(thingList);
     } catch (e) {
       return res.json(e)
@@ -81,11 +78,10 @@ const ThingService = require('./thing.service');
    * @returns {Thing}
    */
   async function remove(req, res, next) {
-    let ThingServiceInstance = new ThingService();
     const thingId = req.params.thingId;
 
     try {
-      const thingRemoved = await ThingServiceInstance.Remove(thingId);
+      const thingRemoved = await ThingService.Remove(thingId);
       return res.json(thingRemoved);
     } catch (e) {
       return res.json(e)
