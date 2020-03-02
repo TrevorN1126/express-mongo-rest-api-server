@@ -30,7 +30,7 @@ thing.save()
 const admin = new User({
   username: newAdminUserName,
   password: newPassword,
-  permissions: ['admin']
+  permissions: ['Admin']
 });
 
 
@@ -59,7 +59,7 @@ admin.save()
 const user = new User({
   username: newUserName,
   password: newPassword,
-  permissions: ['user']
+  permissions: ['User']
 });
 
 

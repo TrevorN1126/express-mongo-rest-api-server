@@ -8,19 +8,19 @@ const router = express.Router(); // eslint-disable-line new-cap
 
 router.route('/')
   /** GET /api/users - Get list of users */
-  .get(protectRoute(['admin']), UserController.list)
+  .get(protectRoute(['Admin']), UserController.list)
 
   /** POST /api/users - Create new user */
-  .post(protectRoute(['admin']), validate(paramValidation.createUser), UserController.create);
+  .post(protectRoute(['Admin']), validate(paramValidation.createUser), UserController.create);
 
 router.route('/:userId')
   /** GET /api/users/:userId - Get user */
-  .get(protectRoute(['admin']), UserController.get)
+  .get(protectRoute(['Admin']), UserController.get)
 
   /** PUT /api/users/:userId - Update user */
-  .put(protectRoute(['admin']), validate(paramValidation.updateUser), UserController.update)
+  .put(protectRoute(['Admin']), validate(paramValidation.updateUser), UserController.update)
 
   /** DELETE /api/users/:userId - Delete user */
-  .delete(protectRoute(['admin']), UserController.remove);
+  .delete(protectRoute(['Admin']), UserController.remove);
 
 module.exports = router;

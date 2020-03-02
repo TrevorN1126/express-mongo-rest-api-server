@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const config = require('./config');
-const debug = require('debug')('express-rest-api-server:db');
+const debug = require('debug')('express-mongodb-rest-api-server:db');
 const util = require('util');
 const logger = require('./winston');
 

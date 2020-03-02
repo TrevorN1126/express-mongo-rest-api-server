@@ -5,7 +5,7 @@ const config = require('../../config/config');
 const UserModel = require('../user/user.model');
 
 /**
-* Creates a new ThingService.
+* Creates a new AuthService.
 * @class
 */
 class AuthService {
@@ -17,30 +17,29 @@ class AuthService {
     try {
       // Find the User
       const user = await this.model.findOne({
-        username: username
+        username
       });
       if (!user) throw Error('User not found.');
 
       const passwordIsValid = bcrypt.compareSync(password, user.password);
-      if (!passwordIsValid) throw Error("Invalid password.")
+      if (!passwordIsValid) throw Error('Invalid password.');
 
       const token = jwt.sign(
-        {user},
+        { user },
         config.jwtSecret,
-        {expiresIn: '2 days'}
+        { expiresIn: '2 days' }
       );
       return {
         success: true,
         message: 'Authentication successfull',
-        user: user,
-        token: token
+        user,
+        token
       };
     } catch (e) {
       // return a Error message describing the reason
       return e;
     }
   }
-
 }
 
 module.exports = new AuthService(UserModel);

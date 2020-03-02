@@ -11,16 +11,16 @@ router.route('/')
   .get(ThingController.list)
 
   /** POST /api/things - Create new thing */
-  .post(protectRoute([['user'], ['admin']]), validate(paramValidation.createThing), ThingController.create);
+  .post(protectRoute([['User'], ['Admin']]), validate(paramValidation.createThing), ThingController.create);
 
 router.route('/:thingId')
   /** GET /api/things/:thingId - Get thing */
   .get(ThingController.get)
 
   /** PUT /api/things/:thingId - Update thing */
-  .put(protectRoute(['admin']), ThingController.update)
+  .put(protectRoute(['Admin']), ThingController.update)
 
   /** DELETE /api/things/:thingId - Delete thing */
-  .delete(protectRoute(['admin']), ThingController.remove);
+  .delete(protectRoute(['Admin']), ThingController.remove);
 
 module.exports = router;

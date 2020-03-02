@@ -1,73 +1,61 @@
-/**
- * @file user.service.js Service for the user component
- */
-const UserModel = require('./user.model');
+const DbService = require('../helpers/baseDbService');
+const models = require('../../config/models');
 
 /**
- * @classdesc Creates a new UserService.
- *
- */
-class UserService {
-
+* Creates a new UserService.
+* @extends DbService
+*/
+class UserService extends DbService {
   /**
-   * Create a new user
-   * @params {object} user - Object representing a new user
-   * @return {object} user
+   * Get the users permissions
+   * @params {string} userId - the _id of the user
+   * @return {Array|Error} returns an array of strings representing the users
+   * permissions or an Error
    */
-  async Create(user) {
+  async GetUserPermissions(userId) {
     try {
-
-      const userRecord = await UserModel.create(user);
-      return { user: userRecord };
-
+      const user = await this.model.findById(userId, 'permissions');
+      if (!user) throw new Error('User not found.');
+      return user.permissions
     } catch (e) {
       return e;
     }
-
   }
 
   /**
-   * Get a user
-   * @params {string} userId - The _id of the user
-   * @return {object} user
+   * Add a permissions to a user
+   * @params {string} userId - the _id of the user
+   * @params {string} - The name of the permission to add
+   * @return {object|Error} returns the new permission
    */
-  async GetUser(userId){
-    let user = await UserModel.findById(userId);
-    if (!user) throw new Error('User not found');
-    return user;
-
+  async AddUserPermission(userId, permission) {
+    try {
+      const user = await this.model.findById(userId, 'permissions');
+      if (!user) throw new Error('User not found.');
+      user.permissions.push(permission);
+      return user;
+    } catch (e) {
+      return e;
+    }
   }
 
   /**
-   * Update a user
-   * @params {string} userId - The _id of the user
-   * @params {object} user - TThe new values for the user
-   * @return {object} user
+   * remove a permissions from a user
+   * @params {string} userId - the _id of the user
+   * @params {string} - The name of the permission to remove
+   * @return {object|Error} returns the user or error
    */
-  async Update(userId, newValues) {
-
-    let user = await UserModel.findById(userId);
-    if (!user) return res.json({ message: 'User not found' });
-    Object.assign(user, newValues);
-    await user.save();
-    return user;
-
-  }
-
-  /**
-   * Get a list of all users
-   * @return {object[]} user - An array of users
-   */
-  async List(){
-    let users = await UserModel.find({});
-    return users;
-  }
-
-  async Remove(userId){
-    let userRemoved = await UserModel.remove({ _id: userId });
-    return userRemoved;
+  async RemoveUserPermission(userId, permission) {
+    try {
+      const user = await this.model.findById(userId);
+      if (!user) throw new Error('User not found.');
+      user.permissions.pull(permission);
+      return user;
+    } catch (e) {
+      return e;
+    }
   }
 
 }
 
-module.exports = UserService;
+module.exports = new UserService('User', models);

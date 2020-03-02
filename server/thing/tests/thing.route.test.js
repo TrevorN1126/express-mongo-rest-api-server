@@ -21,7 +21,7 @@ after((done) => {
 });
 
 describe('## Thing Routes', () => {
-  let admin = {
+  const admin = {
     username: 'TestAdmin',
     password: 'password',
     id: '',
@@ -33,12 +33,14 @@ describe('## Thing Routes', () => {
     description: 'description of newTestThing'
   };
 
-  let updateThing = {
+  const updateThing = {
     name: 'newTestThing1',
     description: 'description of newTestThing1'
   };
 
-  // jwtToken = 'Bearer ';
+  const badThing = {
+    description: 'Thing without the required name'
+  };
 
   before(async () => {
     await request(app)
@@ -51,7 +53,6 @@ describe('## Thing Routes', () => {
         expect(res.body).to.have.property('user');
         admin.id += res.body.user._id;
       });
-
   });
 
   describe('# GET /api/things', () => {
@@ -69,18 +70,6 @@ describe('## Thing Routes', () => {
 
 
   describe('# POST /api/things', () => {
-    it('should report an error - Unauthorized', (done) => {
-      request(app)
-        .post('/api/things')
-        .send(newThing)
-        .expect(httpStatus.UNAUTHORIZED)
-        .then((res) => {
-          expect(res.body.message).to.equal('Unauthorized');
-          done();
-        })
-        .catch(done);
-    });
-
     it('should create a new thing', (done) => {
       request(app)
         .post('/api/things')
@@ -94,6 +83,32 @@ describe('## Thing Routes', () => {
         })
         .catch(done);
     });
+
+    it('should report an error - Unauthorized', (done) => {
+      request(app)
+        .post('/api/things')
+        .send(newThing)
+        .expect(httpStatus.UNAUTHORIZED)
+        .then((res) => {
+          expect(res.body.message).to.equal('Unauthorized');
+          done();
+        })
+        .catch(done);
+    });
+
+    // it('It should report an Error - ', (done) => {
+    //   request(app)
+    //     .post('/api/things')
+    //     .set('Authorization', admin.token)
+    //     .send(badThing)
+    //     .expect(httpStatus.OK)
+    //     .then((res) => {
+    //       expect(res.body.name).to.equal(newThing.name);
+    //       newThing = res.body;
+    //       done();
+    //     })
+    //     .catch(done);
+    // });
   });
 
   describe('# GET /api/things/:thingId', () => {
@@ -112,10 +127,9 @@ describe('## Thing Routes', () => {
       request(app)
         .get('/api/things/56c787ccc67fc16ccc1a5e92')
         .set('Authorization', admin.token)
-        // .expect(httpStatus.NOT_FOUND)
+        .expect(httpStatus.NOT_FOUND)
         .then((res) => {
-          // console.log(res.body);
-          expect(res.body.message).to.equal('Thing Not Found');
+          expect(res.body.message).to.equal('Thing not found.');
           done();
         })
         .catch(done);

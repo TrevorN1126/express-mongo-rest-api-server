@@ -21,7 +21,7 @@ after((done) => {
 });
 
 describe('## User APIs', () => {
-  let admin = {
+  const admin = {
     username: 'TestAdmin',
     password: 'password',
     id: '',
@@ -31,13 +31,13 @@ describe('## User APIs', () => {
   let newUser = {
     username: 'newTestUser',
     password: 'password',
-    permissions: ['user']
+    permissions: ['User']
   };
 
-  let updateUser = {
+  const updateUser = {
     username: 'newTestUser1',
     password: 'newpassword',
-    permissions: ['admin']
+    permissions: ['Admin']
   };
 
   // jwtToken = 'Bearer ';
@@ -53,7 +53,6 @@ describe('## User APIs', () => {
         expect(res.body).to.have.property('user');
         admin.id += res.body.user._id;
       });
-
   });
 
   describe('# GET /api/users', () => {
@@ -102,8 +101,8 @@ describe('## User APIs', () => {
         .send(newUser)
         .expect(httpStatus.OK)
         .then((res) => {
-          expect(res.body.user.username).to.equal(newUser.username);
-          newUser = res.body.user;
+          expect(res.body.username).to.equal(newUser.username);
+          newUser = res.body;
           done();
         })
         .catch(done);
@@ -134,13 +133,13 @@ describe('## User APIs', () => {
         .catch(done);
     });
 
-    it('should report error with message - User Not Found, when user does not exists', (done) => {
+    it('should report error with message - User not found., when user does not exists', (done) => {
       request(app)
         .get('/api/users/56c787ccc67fc16ccc1a5e92')
         .set('Authorization', admin.token)
         .expect(httpStatus.NOT_FOUND)
         .then((res) => {
-          expect(res.body.message).to.equal('User Not Found');
+          expect(res.body.message).to.equal('User not found.');
           done();
         })
         .catch(done);
@@ -192,7 +191,7 @@ describe('## User APIs', () => {
         .set('Authorization', admin.token)
         .expect(httpStatus.OK)
         .then((res) => {
-          expect(res.body.ok).to.equal(1);
+          expect(res.body.n).to.equal(1);
           done();
         })
         .catch(done);
