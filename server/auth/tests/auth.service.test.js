@@ -1,5 +1,5 @@
 const chai = require('chai'); // eslint-disable-line import/newline-after-import
-const { expect, assert } = chai;
+const { expect } = chai;
 
 const AuthService = require('../auth.service');
 

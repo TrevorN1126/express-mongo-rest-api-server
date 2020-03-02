@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
-const config = require('./config/config');
+const logger = require('./config/winston');
 const User = require('./server/user/user.model');
 const Thing = require('./server/thing/thing.model');
+const MongoServer = require('./config/db');
 
 const newUserName = 'TestUser';
 const newPassword = 'password';
@@ -10,11 +10,7 @@ const newAdminUserName = 'TestAdmin';
 const newAdminPassword = 'password';
 
 // connect to mongo db
-const mongoUri = config.mongo.host;
-mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.connection.on('error', () => {
-  throw new Error(`unable to connect to database: ${mongoUri}`);
-});
+MongoServer.initiate();
 
 const thing = new Thing({
   name: 'TheThing',
@@ -23,9 +19,9 @@ const thing = new Thing({
 
 thing.save()
   .then((savedThing) => {
-    console.log(savedThing);
+    logger.info(savedThing);
   })
-  .catch((err) => { console.log(err); });
+  .catch((err) => { logger.info(err); });
 
 const admin = new User({
   username: newAdminUserName,
@@ -33,28 +29,27 @@ const admin = new User({
   permissions: ['Admin']
 });
 
-
 admin.save()
   .then((savedUser) => {
-    console.log(savedUser);
+    logger.info(savedUser);
     // fetch user and test password verification
-    User.findOne({ username: newAdminUserName }, (err, user) => {
-      if (err) throw err;
+    User.findOne({ username: newAdminUserName }, (errFind, user) => {
+      if (errFind) throw errFind;
 
       // test a matching password
       user.comparePassword(newAdminPassword, (err, isMatch) => {
         if (err) throw err;
-        console.log('password:', isMatch); // -> password: true
+        logger.info('password:', isMatch); // -> password: true
       });
 
       // test a failing password
       user.comparePassword('123Password', (err, isMatch) => {
         if (err) throw err;
-        console.log('123Password:', isMatch); // -> 123Password: false
+        logger.info('123Password:', isMatch); // -> 123Password: false
       });
     });
   })
-  .catch((err) => { console.log(err); });
+  .catch((err) => { logger.info(err); });
 
 const user = new User({
   username: newUserName,
@@ -65,24 +60,24 @@ const user = new User({
 
 user.save()
   .then((savedUser) => {
-    console.log(savedUser);
+    logger.info(savedUser);
     // fetch user and test password verification
-    User.findOne({ username: newUserName }, (err, user) => {
-      if (err) throw err;
+    User.findOne({ username: newUserName }, (errFind, newUser) => {
+      if (errFind) throw errFind;
 
       // test a matching password
-      user.comparePassword(newPassword, (err, isMatch) => {
+      newUser.comparePassword(newPassword, (err, isMatch) => {
         if (err) throw err;
-        console.log('password:', isMatch); // -> Password123: true
+        logger.info('password:', isMatch); // -> Password123: true
       });
 
       // test a failing password
-      user.comparePassword('123Password', (err, isMatch) => {
+      newUser.comparePassword('123Password', (err, isMatch) => {
         if (err) throw err;
-        console.log('123Password:', isMatch); // -> 123Password: false
+        logger.info('123Password:', isMatch); // -> 123Password: false
       });
-
-      mongoose.disconnect();
     });
   })
-  .catch((err) => { console.log(err); });
+  .catch((err) => { logger.info(err); });
+
+MongoServer.close();

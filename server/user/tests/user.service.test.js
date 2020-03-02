@@ -32,8 +32,10 @@ describe('## User Service', () => {
     });
     it('It should create a new user', async () => {
       const newUser = await UserService.Create(userTest);
-      userTest = newUser;
+      // test pre save hook for user model before overwriting local newUser
+      expect(newUser.password).to.not.equal(userTest.password);
       expect(newUser.username).to.equal(userTest.username);
+      userTest = newUser;
     });
   });
 

@@ -1,3 +1,4 @@
+/* eslint max-classes-per-file: ["error", 2] */
 const httpStatus = require('http-status');
 
 /**

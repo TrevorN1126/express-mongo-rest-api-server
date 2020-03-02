@@ -15,7 +15,7 @@ async function create(req, res, next) {
   try {
     const savedThing = await ThingService.Create(newThing);
     if (savedThing.message) {
-      throw new APIError(thing.message, httpStatus.NOT_FOUND, true);
+      throw new APIError(savedThing.message, httpStatus.NOT_FOUND, true);
     }
     return res.json(savedThing);
   } catch (e) {
@@ -56,7 +56,7 @@ async function update(req, res, next) {
     const updatedThing = await ThingService.Update(thingId, newValues);
     return res.json(updatedThing);
   } catch (e) {
-    return next(error);
+    return next(e);
   }
 }
 

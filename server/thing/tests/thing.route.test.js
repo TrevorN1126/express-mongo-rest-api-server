@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 const request = require('supertest');
 const httpStatus = require('http-status');
 const chai = require('chai'); // eslint-disable-line import/newline-after-import
@@ -12,13 +12,13 @@ chai.config.includeStack = true;
  * root level hooks
  */
 
-after((done) => {
-  // required because https://github.com/Automattic/mongoose/issues/1251#issuecomment-65793092
-  mongoose.models = {};
-  mongoose.modelSchemas = {};
-  mongoose.connection.close();
-  done();
-});
+// after((done) => {
+//   // required because https://github.com/Automattic/mongoose/issues/1251#issuecomment-65793092
+//   mongoose.models = {};
+//   mongoose.modelSchemas = {};
+//   mongoose.connection.close();
+//   done();
+// });
 
 describe('## Thing Routes', () => {
   const admin = {
@@ -96,19 +96,18 @@ describe('## Thing Routes', () => {
         .catch(done);
     });
 
-    // it('It should report an Error - ', (done) => {
-    //   request(app)
-    //     .post('/api/things')
-    //     .set('Authorization', admin.token)
-    //     .send(badThing)
-    //     .expect(httpStatus.OK)
-    //     .then((res) => {
-    //       expect(res.body.name).to.equal(newThing.name);
-    //       newThing = res.body;
-    //       done();
-    //     })
-    //     .catch(done);
-    // });
+    it('It should report an Error - "name is required"', (done) => {
+      request(app)
+        .post('/api/things')
+        .set('Authorization', admin.token)
+        .send(badThing)
+        .expect(httpStatus.BAD_REQUEST)
+        .then((res) => {
+          expect(res.body.message).to.equal('"name" is required');
+          done();
+        })
+        .catch(done);
+    });
   });
 
   describe('# GET /api/things/:thingId', () => {

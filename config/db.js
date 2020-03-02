@@ -1,15 +1,18 @@
 const mongoose = require('mongoose');
-const config = require('./config');
 const debug = require('debug')('express-mongodb-rest-api-server:db');
 const util = require('util');
+const config = require('./config');
 const logger = require('./winston');
 
-
 class MongoServer {
-  initiate() {
+  static initiate() {
     // connect to mongo db
     const mongoUri = config.mongo.host;
-    mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true });
+    mongoose.connect(mongoUri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true
+    });
     mongoose.connection.once('open', () => {
       logger.info(`Mongoose default connection is open to ${mongoUri}`);
     });
@@ -24,7 +27,7 @@ class MongoServer {
     }
   }
 
-  close() {
+  static close() {
     mongoose.disconnect();
     mongoose.connection.on('disconnected', () => {
       logger.info('Connection Closed');
@@ -33,4 +36,4 @@ class MongoServer {
 }
 
 
-module.exports = new MongoServer();
+module.exports = MongoServer;
