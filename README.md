@@ -47,19 +47,9 @@ cp .env.example .env
 
 **Make sure the database server is running**
 
-Create datbases
+Seed database with a test admin and user:
 ```sh
-npx sequelize-cli db:create
-```
-
-Create db tables
-```sh
-npx sequelize-cli db:migrate
-```
-
-Seed db tables
-```sh
-npx sequelize-cli db:seed:all
+yarn seed
 ```
 
 Start server:
@@ -71,7 +61,7 @@ yarn start
 yarn start-dev
 
 # Selectively set DEBUG env var to get logs
-DEBUG=express-sequelize-rest-api-server:* yarn start
+DEBUG=express-mongodb-rest-api-server:* yarn start
 ```
 Refer [debug](https://www.npmjs.com/package/debug) to know how to selectively turn on logs.
 
