@@ -1,5 +1,7 @@
 # Express Rest API Server Boilerplate
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/fde620b09dcb442992b8cbe2e779c61b)](https://app.codacy.com/manual/TrevorN1126/express-mongo-rest-api-server?utm_source=github.com&utm_medium=referral&utm_content=TrevorN1126/express-mongo-rest-api-server&utm_campaign=Badge_Grade_Dashboard)
+
 **This project is a work in progress**
 ## Overview
 This is a boilerplate application for building REST APIs with Express, Mongoose, permission based JWT Authentication and Mocha tests.
