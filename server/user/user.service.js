@@ -16,7 +16,7 @@ class UserService extends DbService {
     try {
       const user = await this.model.findById(userId, 'permissions');
       if (!user) throw new Error('User not found.');
-      return user.permissions
+      return user.permissions;
     } catch (e) {
       return e;
     }
@@ -55,7 +55,6 @@ class UserService extends DbService {
       return e;
     }
   }
-
 }
 
 module.exports = new UserService('User', models);

@@ -26,7 +26,7 @@ async function create(req, res, next) {
 
     return res.json(savedUser);
   } catch (e) {
-    return res.json(e);
+    return next(e);
   }
 }
 
