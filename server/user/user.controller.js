@@ -101,6 +101,73 @@ async function remove(req, res, next) {
   }
 }
 
+/**
+ * Add a permission to an existing user
+ * @property {string} req.params.userId - The id of user.
+ * @property {String} req.body.permission - a string with the new permission for the user.
+ * @returns {User}
+ */
+async function addPermission(req, res, next) {
+  const { userId } = req.params;
+  const { permission } = req.body;
+  try {
+    const newPermission = await UserService.AddUserPermission(userId, permission);
+    if (newPermission instanceof Error) {
+      throw new APIError(newPermission.message, httpStatus.NOT_FOUND, true);
+    }
+    return res.json(newPermission);
+  } catch (e) {
+    return next(e);
+  }
+}
+
+/**
+ * Get permissions for an existing user
+ * @property {string} req.params.userId - The _id of user.
+ * @returns {User}
+ */
+async function getPermissions(req, res, next) {
+  const { userId } = req.params;
+
+  try {
+    const permissions = await UserService.GetUserPermissions(userId);
+    if (permissions instanceof Error) {
+      throw new APIError(permissions.message, httpStatus.NOT_FOUND, true);
+    }
+    return res.json(permissions);
+  } catch (e) {
+    return next(e);
+  }
+}
+
+/**
+ * remove a permission to an existing user
+ * @property {string} req.params.userId - The id of user.
+ * @property {String} req.body.permission - a string with the permission to remove.
+ * @returns {User}
+ */
+async function removePermission(req, res, next) {
+  const { userId } = req.params;
+  const { permission } = req.body;
+
+  try {
+    const removeUserPermission = await UserService.RemoveUserPermission(userId, permission);
+    if (removeUserPermission instanceof Error) {
+      throw new APIError(removeUserPermission.message, httpStatus.NOT_FOUND, true);
+    }
+    return res.json(removeUserPermission);
+  } catch (e) {
+    return next(e);
+  }
+}
+
 module.exports = {
-  create, get, update, list, remove
+  create,
+  get,
+  update,
+  list,
+  remove,
+  addPermission,
+  getPermissions,
+  removePermission
 };

@@ -68,6 +68,7 @@ describe('## User Service', () => {
       const permissions = await UserService.GetUserPermissions(userTest._id);
       expect(permissions).to.be.an('array');
       expect(permissions).to.include('User');
+      expect(permissions).to.include('Admin');
     });
     it('It should remove a permission from a user', async () => {
       const removedPermission = await UserService.RemoveUserPermission(userTest._id, 'Admin'); // eslint-disable-line max-len

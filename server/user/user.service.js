@@ -33,6 +33,7 @@ class UserService extends DbService {
       const user = await this.model.findById(userId, 'permissions');
       if (!user) throw new Error('User not found.');
       user.permissions.push(permission);
+      await user.save();
       return user;
     } catch (e) {
       return e;

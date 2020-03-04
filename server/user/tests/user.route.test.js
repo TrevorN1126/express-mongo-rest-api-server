@@ -39,6 +39,8 @@ describe('## User APIs', () => {
     password: 'newpassword'
   };
 
+  const adminPermission = { permission: 'Admin' };
+
   // jwtToken = 'Bearer ';
 
   before(async () => {
@@ -165,6 +167,85 @@ describe('## User APIs', () => {
         .expect(httpStatus.OK)
         .then((res) => {
           expect(res.body.username).to.equal(updateUser.username);
+          done();
+        })
+        .catch(done);
+    });
+  });
+
+  describe('# POST /api/users/:userId/permissions', () => {
+    it('It should add a permission to an existing user', (done) => {
+      request(app)
+        .post(`/api/users/${newUser._id}/permissions`)
+        .set('Authorization', adminToken)
+        .send(adminPermission)
+        .expect(httpStatus.OK)
+        .then((res) => {
+          expect(res.body.permissions).to.include(adminPermission.permission);
+          done();
+        })
+        .catch(done);
+    });
+    it('It should report an error - User not found.', (done) => {
+      request(app)
+        .post('/api/users/56c787ccc67fc16ccc1a5e92/permissions')
+        .set('Authorization', adminToken)
+        .send(adminPermission)
+        .expect(httpStatus.NOT_FOUND)
+        .then((res) => {
+          expect(res.body.message).to.equal('User not found.');
+          done();
+        })
+        .catch(done);
+    });
+  });
+
+  describe('# GET /api/users/:userId/permissions', () => {
+    it('It should get the permissions on an existing user', (done) => {
+      request(app)
+        .get(`/api/users/${newUser._id}/permissions`)
+        .set('Authorization', adminToken)
+        .expect(httpStatus.OK)
+        .then((res) => {
+          expect(res.body).to.include(adminPermission.permission);
+          done();
+        })
+        .catch(done);
+    });
+    it('It should report an error - User not found.', (done) => {
+      request(app)
+        .get('/api/users/56c787ccc67fc16ccc1a5e92/permissions')
+        .set('Authorization', adminToken)
+        .expect(httpStatus.NOT_FOUND)
+        .then((res) => {
+          expect(res.body.message).to.equal('User not found.');
+          done();
+        })
+        .catch(done);
+    });
+  });
+
+  describe('# DELETE /api/users/:userId/permissions', () => {
+    it('should report an error - Unauthorized', (done) => {
+      request(app)
+        .delete(`/api/users/${newUser._id}/permissions`)
+        .send(adminPermission)
+        .expect(httpStatus.UNAUTHORIZED)
+        .then((res) => {
+          expect(res.body.message).to.equal('Unauthorized');
+          done();
+        })
+        .catch(done);
+    });
+
+    it('should delete a permission from a user', (done) => {
+      request(app)
+        .delete(`/api/users/${newUser._id}/permissions`)
+        .set('Authorization', adminToken)
+        .send(adminPermission)
+        .expect(httpStatus.OK)
+        .then((res) => {
+          expect(res.body.permissions).to.not.include(adminPermission.permission);
           done();
         })
         .catch(done);
