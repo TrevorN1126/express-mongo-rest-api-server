@@ -28,5 +28,26 @@ module.exports = {
     [Segments.PARAMS]: Joi.object().keys({
       userId: Joi.string().hex().required()
     })
+  }),
+  getPermissions: celebrate({
+    [Segments.PARAMS]: Joi.object().keys({
+      userId: Joi.string().hex().required()
+    })
+  }),
+  addPermission: celebrate({
+    [Segments.PARAMS]: Joi.object().keys({
+      userId: Joi.string().hex().required()
+    }),
+    [Segments.BODY]: Joi.object().keys({
+      permission: Joi.string().required(),
+    })
+  }),
+  removePermission: celebrate({
+    [Segments.PARAMS]: Joi.object().keys({
+      userId: Joi.string().hex().required()
+    }),
+    [Segments.BODY]: Joi.object().keys({
+      permission: Joi.string().required(),
+    })
   })
 };

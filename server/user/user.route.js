@@ -69,11 +69,11 @@ router.route('/:userId')
 
 router.route('/:userId/permissions')
   /** GET /api/users/:userId/permissions - Add user permission */
-  .get(protectRoute(['Admin']), UserController.getPermissions)
+  .get(protectRoute(['Admin']), routeValidation.getPermissions, UserController.getPermissions)
 
   /** GET /api/users/:userId/permissions - get user permissions */
-  .post(protectRoute(['Admin']), UserController.addPermission)
+  .post(protectRoute(['Admin']), routeValidation.addPermission, UserController.addPermission)
 
   /** DELETE /api/users/:userId/permissions - Delete user permission */
-  .delete(protectRoute(['Admin']), UserController.removePermission);
+  .delete(protectRoute(['Admin']), routeValidation.removePermission, UserController.removePermission);
 module.exports = router;
