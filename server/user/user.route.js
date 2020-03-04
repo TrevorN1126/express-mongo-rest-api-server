@@ -14,12 +14,12 @@ router.route('/')
 
 router.route('/:userId')
   /** GET /api/users/:userId - Get user */
-  .get(protectRoute(['Admin']), UserController.get)
+  .get(protectRoute(['Admin']), routeValidation.get, UserController.get)
 
   /** PUT /api/users/:userId - Update user */
   .put(protectRoute(['Admin']), routeValidation.update, UserController.update)
 
   /** DELETE /api/users/:userId - Delete user */
-  .delete(protectRoute(['Admin']), UserController.remove);
+  .delete(protectRoute(['Admin']), routeValidation.remove, UserController.remove);
 
 module.exports = router;

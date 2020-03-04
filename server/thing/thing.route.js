@@ -14,12 +14,12 @@ router.route('/')
 
 router.route('/:thingId')
   /** GET /api/things/:thingId - Get thing */
-  .get(ThingController.get)
+  .get(routeValidation.get, ThingController.get)
 
   /** PUT /api/things/:thingId - Update thing */
-  .put(protectRoute(['Admin']), ThingController.update)
+  .put(protectRoute(['Admin']), routeValidation.update, ThingController.update)
 
   /** DELETE /api/things/:thingId - Delete thing */
-  .delete(protectRoute(['Admin']), ThingController.remove);
+  .delete(protectRoute(['Admin']), routeValidation.remove, ThingController.remove);
 
 module.exports = router;

@@ -18,5 +18,15 @@ module.exports = {
       username: Joi.string(),
       password: Joi.string()
     })
+  }),
+  get: celebrate({
+    [Segments.PARAMS]: Joi.object().keys({
+      userId: Joi.string().hex().required()
+    })
+  }),
+  remove: celebrate({
+    [Segments.PARAMS]: Joi.object().keys({
+      userId: Joi.string().hex().required()
+    })
   })
 };
