@@ -18,7 +18,7 @@
     "test": "cross-env NODE_ENV=test ./node_modules/.bin/mocha --ui bdd --reporter spec --colors server --recursive",
     "test:watch": "yarn test -- --watch",
     "test:coverage": "nyc --reporter=lcov --reporter=text yarn test",
-    "docs": "./node_modules/.bin/jsdoc server -t ./node_modules/ink-docstrap/template -R README.md -r -d docs"
+    "docs": "./node_modules/.bin/jsdoc server -t ./node_modules/ink-docstrap/template -R README.md -r -d docs -c jsdoc.conf"
   },
   "dependencies": {
     "@hapi/joi": "false17.1.0",
@@ -37,6 +37,7 @@
     "helmet": "3.21.2",
     "http-status": "1.4.2",
     "joi": "false14.3.1",
+    "jsdoc-http-plugin": "false0.3.2",
     "jsonwebtoken": "8.5.1",
     "method-override": "^3.0.0",
     "mongoose": "5.8.10",

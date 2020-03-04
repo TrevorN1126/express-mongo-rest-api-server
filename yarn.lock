@@ -3900,7 +3900,14 @@ jsbn@~0.1.0:
   resolved "https://registry.yarnpkg.com/jsbn/-/jsbn-0.1.1.tgz#a5e654c2e5a2deb5f201d96cefbca80c0ef2f513"
   integrity sha1-peZUwuWi3rXyAdls77yoDA7y9RM=
 
-jsdoc@false3.6.3:
+jsdoc-http-plugin@false0.3.2:
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/jsdoc-http-plugin/-/jsdoc-http-plugin-0.3.2.tgz#bfad50eb26f6a6641298227e5854eefc0a001193"
+  integrity sha512-BoTD3kDu+bvl2MVp1NnSPYwyz4JRzcrufV5bN4kH7uqt4jwu5xBKpFF7VVk/eTDem3EBUQ2SvVfog71F1kTkjg==
+  dependencies:
+    jsdoc "^3.4.3"
+
+jsdoc@^3.4.3, jsdoc@false3.6.3:
   version "3.6.3"
   resolved "https://registry.yarnpkg.com/jsdoc/-/jsdoc-3.6.3.tgz#dccea97d0e62d63d306b8b3ed1527173b5e2190d"
   integrity sha512-Yf1ZKA3r9nvtMWHO1kEuMZTlHOF8uoQ0vyo5eH7SQy5YeIiHM+B0DgKnn+X6y6KDYZcF7G2SPkKF+JORCXWE/A==

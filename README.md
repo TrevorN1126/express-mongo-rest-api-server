@@ -5,24 +5,22 @@
 **This project is a work in progress**
 ## Overview
 This is a boilerplate application for building REST APIs with Express, Mongoose, permission based JWT Authentication and Mocha tests.
-Created with attempting to follow [Node.js Best Practices](https://github.com/goldbergyoni/nodebestpractices) as closely as possible.
+Created by attempting to follow [Node.js Best Practices](https://github.com/goldbergyoni/nodebestpractices) as closely as possible.
 
 ## Features
 | Feature | Summary |
 |---------|---------|
+| Uses [yarn](https://yarnpkg.com) over npm | Uses yarn package manager by facebook. You can read more about it [here](https://code.facebook.com/posts/1840075619545360) |
 | Authentication via JsonWebToken | Supports authentication using [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken). |
-| Code Linting | JavaScript code linting is done using [ESLint](http://eslint.org) - a pluggable linter tool for identifying and reporting on patterns in JavaScript. Uses ESLint with [eslint-config-airbnb](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb), which tries to follow the Airbnb JavaScript style  guide. |
-| Auto server restart | Restart the server using [nodemon](https://github.com/remy/nodemon) in real-time anytime an edit is made, with babel compilation and eslint. |
-| Debugging via [debug](https://www.npmjs.com/package/debug) | Instead of inserting and deleting console.log you can replace it with the debug function and just leave it there. You can then selectively debug portions of your code by setting DEBUG env variable. If DEBUG env variable is not set, nothing is displayed to the console. |
+| Code Linting | JavaScript code linting is done using [ESLint](http://eslint.org). Uses ESLint with [eslint-config-airbnb](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb), which follows the Airbnb JavaScript style guide, and ecma version 8. Checkout .eslintrc for configuration. |
+| Auto server restart | Restart the server using [nodemon](https://github.com/remy/nodemon) during development anytime an edit is made. Refer to the getting started section below to see the yarn script for starting the server. |
+| Debugging via [debug](https://www.npmjs.com/package/debug) | You can then selectively debug portions of your code by setting DEBUG env variable. If DEBUG env variable is not set, nothing is displayed to the console. |
 | API parameter validation via [express-validation](https://www.npmjs.com/package/express-validation) | Validate body, params, query, headers and cookies of a request (via middleware) and return a response with errors; if any of the configured validation rules fail. You won't anymore need to make your route handler dirty with such validations. |
-| Pre-commit hooks | Runs lint and tests before any commit is made locally, making sure that only tested and quality code is committed |
-| Secure app via [helmet](https://github.com/helmetjs/helmet) | Helmet helps secure Express apps by setting various HTTP headers. |
-| Uses [yarn](https://yarnpkg.com) over npm | Uses new released yarn package manager by facebook. You can read more about it [here](https://code.facebook.com/posts/1840075619545360) |
-| CORS support via [cors](https://github.com/expressjs/cors) | fasdfasdfasdfdsdasfsdfasdfasdfasdf |
-| Uses [http-status](https://www.npmjs.com/package/http-status) to set http status codes | fasdfasdfasdfdsdasfsdfasdfasdfasdf |
-| Generated documentation using [jsdocs]() | fasdfasdfasdfdsdasfsdfasdfasdfasdf |
+| Pre-commit hooks with [husky](https://www.npmjs.com/package/husky) | Runs tests before any commit is made locally, can be overrode with the git --Force flag. |
+| Uses [mocha](https://www.npmjs.com/package/mocha), [supertest](https://www.npmjs.com/package/supertest) for unit and integration testing.  | fasdfasdfasdfdsdasfsdfasdfasdfasdf |
+| Uses [instanbul](https://www.npmjs.com/package/nyc) for code coverage.  | fasdfasdfasdfdsdasfsdfasdfasdfasdf |
+| Generated documentation using [jsdocs](https://www.npmjs.com/package/jsdoc) and [jsdoc-http-plugin](https://www.npmjs.com/package/jsdoc-http-plugin). | fasdfasdfasdfdsdasfsdfasdfasdfasdf |
 | Has `.editorconfig` | which helps developers define and maintain consistent coding styles between different editors and IDEs. |
-| Uses mocha |  |
 
 
 ## Getting Started
