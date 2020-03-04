@@ -7,26 +7,13 @@ const app = require('../../../app');
 
 chai.config.includeStack = true;
 
-
-/**
- * root level hooks
- */
-
-// after((done) => {
-//   // required because https://github.com/Automattic/mongoose/issues/1251#issuecomment-65793092
-//   mongoose.models = {};
-//   mongoose.modelSchemas = {};
-//   mongoose.connection.close();
-//   done();
-// });
-
 describe('## Thing Routes', () => {
   const admin = {
     username: 'TestAdmin',
-    password: 'password',
-    id: '',
-    token: 'Bearer '
+    password: 'password'
   };
+
+  let adminToken = 'Bearer ';
 
   let newThing = {
     name: 'newTestThing',
@@ -49,7 +36,7 @@ describe('## Thing Routes', () => {
       .expect(httpStatus.OK)
       .then((res) => {
         expect(res.body).to.have.property('token');
-        admin.token += res.body.token;
+        adminToken += res.body.token;
         expect(res.body).to.have.property('user');
         admin.id += res.body.user._id;
       });
@@ -73,7 +60,7 @@ describe('## Thing Routes', () => {
     it('should create a new thing', (done) => {
       request(app)
         .post('/api/things')
-        .set('Authorization', admin.token)
+        .set('Authorization', adminToken)
         .send(newThing)
         .expect(httpStatus.OK)
         .then((res) => {
@@ -99,7 +86,7 @@ describe('## Thing Routes', () => {
     it('It should report an Error - "name is required"', (done) => {
       request(app)
         .post('/api/things')
-        .set('Authorization', admin.token)
+        .set('Authorization', adminToken)
         .send(badThing)
         .expect(httpStatus.BAD_REQUEST)
         .then((res) => {
@@ -125,7 +112,7 @@ describe('## Thing Routes', () => {
     it('should report error with message - Thing Not Found, when thing does not exists', (done) => {
       request(app)
         .get('/api/things/56c787ccc67fc16ccc1a5e92')
-        .set('Authorization', admin.token)
+        .set('Authorization', adminToken)
         .expect(httpStatus.NOT_FOUND)
         .then((res) => {
           expect(res.body.message).to.equal('Thing not found.');
@@ -151,7 +138,7 @@ describe('## Thing Routes', () => {
     it('should update thing details', (done) => {
       request(app)
         .put(`/api/things/${newThing._id}`)
-        .set('Authorization', admin.token)
+        .set('Authorization', adminToken)
         .send(updateThing)
         .expect(httpStatus.OK)
         .then((res) => {
@@ -177,7 +164,7 @@ describe('## Thing Routes', () => {
     it('should delete a thing', (done) => {
       request(app)
         .delete(`/api/things/${newThing._id}`)
-        .set('Authorization', admin.token)
+        .set('Authorization', adminToken)
         .expect(httpStatus.OK)
         .then((res) => {
           expect(res.body.ok).to.equal(1);

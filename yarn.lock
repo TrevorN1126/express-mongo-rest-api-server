@@ -171,7 +171,7 @@
   resolved "https://registry.yarnpkg.com/@hapi/hoek/-/hoek-9.0.2.tgz#57597083f763eafbfdc902d16ec868aa787b24d2"
   integrity sha512-LyibKv2QnD9BPI5g2L+g85yiIPv3ajYpENGFgy4u0xCLPhXWG1Zdx29neSB8sgX0/wz6k5TMjHzTwJ6+DaBYOA==
 
-"@hapi/joi@false17.1.0":
+"@hapi/joi@17.x.x", "@hapi/joi@false17.1.0":
   version "17.1.0"
   resolved "https://registry.yarnpkg.com/@hapi/joi/-/joi-17.1.0.tgz#cc4000b6c928a6a39b9bef092151b6bdee10ce55"
   integrity sha512-ob67RcPlwRWxBzLCnWvcwx5qbwf88I3ykD7gcJLWOTRfLLgosK7r6aeChz4thA3XRvuBfI0KB1tPVl2EQFlPXw==
@@ -942,6 +942,14 @@ catharsis@^0.8.11:
   integrity sha512-a+xUyMV7hD1BrDQA/3iPV7oc+6W26BgVJO05PGEoatMyIuPScQKsde6i3YorWX1qs+AZjnJ18NqdKoCtKiNh1g==
   dependencies:
     lodash "^4.17.14"
+
+celebrate@false12.0.0:
+  version "12.0.0"
+  resolved "https://registry.yarnpkg.com/celebrate/-/celebrate-12.0.0.tgz#1972fcfe8c5118e6e65029b259edb7d927a89318"
+  integrity sha512-+6xa+Kz8zaTaYaUIInkwUrEGalha7t7jvZn+nXPCRWdpOWdNJmeyCuxjwF8P2YUc5MJSCrkQBxK5mlHfIJrl/A==
+  dependencies:
+    "@hapi/joi" "17.x.x"
+    escape-html "1.0.3"
 
 chai@4.2.0:
   version "4.2.0"
@@ -1986,7 +1994,7 @@ es6-weak-map@^2.0.1:
     es6-iterator "^2.0.3"
     es6-symbol "^3.1.1"
 
-escape-html@~1.0.3:
+escape-html@1.0.3, escape-html@~1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/escape-html/-/escape-html-1.0.3.tgz#0258eae4d3d0c0974de1c169188ef0051d1d1988"
   integrity sha1-Aljq5NPQwJdN4cFpGI7wBR0dGYg=

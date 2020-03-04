@@ -23,10 +23,10 @@ after((done) => {
 describe('## User APIs', () => {
   const admin = {
     username: 'TestAdmin',
-    password: 'password',
-    id: '',
-    token: 'Bearer '
+    password: 'password'
   };
+
+  let adminToken = 'Bearer ';
 
   let newUser = {
     username: 'newTestUser',
@@ -36,8 +36,7 @@ describe('## User APIs', () => {
 
   const updateUser = {
     username: 'newTestUser1',
-    password: 'newpassword',
-    permissions: ['Admin']
+    password: 'newpassword'
   };
 
   // jwtToken = 'Bearer ';
@@ -49,9 +48,8 @@ describe('## User APIs', () => {
       .expect(httpStatus.OK)
       .then((res) => {
         expect(res.body).to.have.property('token');
-        admin.token += res.body.token;
+        adminToken += res.body.token;
         expect(res.body).to.have.property('user');
-        admin.id += res.body.user._id;
       });
   });
 
@@ -70,7 +68,7 @@ describe('## User APIs', () => {
     it('should get all users', (done) => {
       request(app)
         .get('/api/users')
-        .set('Authorization', admin.token)
+        .set('Authorization', adminToken)
         .expect(httpStatus.OK)
         .then((res) => {
           expect(res.body).to.be.an('array');
@@ -97,7 +95,7 @@ describe('## User APIs', () => {
     it('should create a new user', (done) => {
       request(app)
         .post('/api/users')
-        .set('Authorization', admin.token)
+        .set('Authorization', adminToken)
         .send(newUser)
         .expect(httpStatus.OK)
         .then((res) => {
@@ -124,7 +122,7 @@ describe('## User APIs', () => {
     it('should get user details', (done) => {
       request(app)
         .get(`/api/users/${newUser._id}`)
-        .set('Authorization', admin.token)
+        .set('Authorization', adminToken)
         .expect(httpStatus.OK)
         .then((res) => {
           expect(res.body.username).to.equal(newUser.username);
@@ -136,7 +134,7 @@ describe('## User APIs', () => {
     it('should report error with message - User not found., when user does not exists', (done) => {
       request(app)
         .get('/api/users/56c787ccc67fc16ccc1a5e92')
-        .set('Authorization', admin.token)
+        .set('Authorization', adminToken)
         .expect(httpStatus.NOT_FOUND)
         .then((res) => {
           expect(res.body.message).to.equal('User not found.');
@@ -162,7 +160,7 @@ describe('## User APIs', () => {
     it('should update user details', (done) => {
       request(app)
         .put(`/api/users/${newUser._id}`)
-        .set('Authorization', admin.token)
+        .set('Authorization', adminToken)
         .send(updateUser)
         .expect(httpStatus.OK)
         .then((res) => {
@@ -188,7 +186,7 @@ describe('## User APIs', () => {
     it('should delete a user', (done) => {
       request(app)
         .delete(`/api/users/${newUser._id}`)
-        .set('Authorization', admin.token)
+        .set('Authorization', adminToken)
         .expect(httpStatus.OK)
         .then((res) => {
           expect(res.body.n).to.equal(1);
