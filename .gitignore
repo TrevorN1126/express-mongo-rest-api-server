@@ -53,3 +53,4 @@ node_modules
 
 # Todo list
 todo.md
+config/param-validation.js

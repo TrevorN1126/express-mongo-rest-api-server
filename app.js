@@ -2,7 +2,7 @@ const express = require('express');
 const logger = require('morgan');
 const httpStatus = require('http-status');
 const expressWinston = require('express-winston');
-const expressValidation = require('express-validation');
+const { errors } = require('celebrate');
 const commonMiddleware = require('./config/common-middleware');
 
 const config = require('./config/config');
@@ -51,14 +51,12 @@ app.use('/api', routes);
 /**
 * Error Handling
 */
+// handle celebrate validation errors responds {statusCode:400, message:'what is missing'}
+app.use(errors());
+
 // if error is not an instanceOf APIError, convert it.
 app.use((err, req, res, next) => {
-  if (err instanceof expressValidation.ValidationError) {
-    // validation error contains errors which is an array of error each containing message[]
-    const unifiedErrorMessage = err.errors.map((error) => error.messages.join('. ')).join(' and ');
-    const error = new APIError(unifiedErrorMessage, err.status, true);
-    return next(error);
-  } if (!(err instanceof APIError)) {
+  if (!(err instanceof APIError)) {
     const apiError = new APIError(err.message, err.status, err.isPublic);
     return next(apiError);
   }

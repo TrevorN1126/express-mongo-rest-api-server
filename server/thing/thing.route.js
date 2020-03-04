@@ -1,6 +1,5 @@
 const express = require('express');
-const validate = require('express-validation');
-const paramValidation = require('../../config/param-validation');
+const routeValidation = require('./thing.validate');
 const ThingController = require('./thing.controller');
 const protectRoute = require('../middleware/protectRoute');
 
@@ -11,7 +10,7 @@ router.route('/')
   .get(ThingController.list)
 
   /** POST /api/things - Create new thing */
-  .post(protectRoute([['User'], ['Admin']]), validate(paramValidation.createThing), ThingController.create);
+  .post(protectRoute([['User'], ['Admin']]), routeValidation.create, ThingController.create);
 
 router.route('/:thingId')
   /** GET /api/things/:thingId - Get thing */
