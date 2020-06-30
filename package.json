@@ -31,7 +31,7 @@
     "debug": "^4.1.1",
     "dotenv": "^8.2.0",
     "express": "4.17.1",
-    "express-jwt": "5.3.1",
+    "express-jwt": "6.0.0",
     "express-jwt-permissions": "false1.3.3",
     "express-winston": "4.0.2",
     "helmet": "3.21.2",
