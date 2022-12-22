@@ -36,7 +36,7 @@
     "express-winston": "4.0.2",
     "helmet": "3.21.2",
     "http-status": "1.4.2",
-    "jsonwebtoken": "8.5.1",
+    "jsonwebtoken": "9.0.0",
     "method-override": "^3.0.0",
     "mongoose": "5.8.10",
     "mongoose-unique-validator": "false2.0.3",
